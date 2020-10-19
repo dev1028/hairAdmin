@@ -1,17 +1,12 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@ page session="false" %>
 <%@taglib uri="http://www.springframework.org/tags" prefix="spring" %>
-
+<%@ taglib uri="http://tiles.apache.org/tags-tiles" prefix="tiles"%>
 <html>
 <head>
-	<title>Home</title>
+
 </head>
 <body>
-${empVO.firstName } : ${evo.lastName }
-<h1>
-	Hello world! 
-</h1>
-
-<P>  The time on the server is ${serverTime}. </P>
+	<tiles:insertAttribute name="body" />
 </body>
 </html>

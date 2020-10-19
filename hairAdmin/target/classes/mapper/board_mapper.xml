@@ -1,0 +1,197 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.dbal.app.emp.mapper.BoardMapper">
+	<delete id="qnaDelete">
+		delete from
+		qna
+		WHERE qna_no
+		in
+		<foreach item="item" collection="array" open="(" close=")"
+			separator=",">
+			#{item}
+		</foreach>
+	</delete>
+
+	<select id="getQnaList" resultType="qna">
+		select QNA_NO ,QNA_SHOP_CUSTOMER_NO ,QNA_TITLE
+		,QNA_CONTENTS
+		,QNA_WRITEDATE ,QNA_OPENSTATUS ,QNA_HITS,QNA_CATEGORY
+		,EMP_NO ,QNA_WHO
+		,QNA_REF,QNA_REPOS,QNA_LEVEL,QNA_WRITER ,
+		(select
+		c.code_info from code
+		c
+		where c.secondary_code=q.qna_who) as qna_whov,
+		(select z.code_info
+		from code z where z.secondary_code=q.qna_category)
+		as
+		qna_categoryv,
+		(select count(qna_no) from qna r where
+		qna_ref=q.qna_no) as
+		answerstatus
+		from qna q
+		<where>
+			<if test="who != null">and q.qna_who like'%'||#{who}||'%'</if>
+			<if test="category != null">and q.qna_category like'%'||#{category}||'%'</if>
+			<if
+				test='searchInput != null and (searchType eq "title".toString())'>and q.qna_title like '%'||#{searchInput}||'%'</if>
+			<if
+				test='searchInput != null and (searchType eq "contents".toString())'>and q.qna_contents like '%'||#{searchInput}||'%'</if>
+			
+			<if test='startDate!=null and startDate!="" '> and q.qna_writedate between #{startDate} and
+				#{endDate}
+			</if>
+
+		</where>
+		order by QNA_REF desc,
+		QNA_REPOS asc, QNA_WRITEDATE
+		desc
+	</select>
+
+	<insert id="qnaInsert" parameterType="qna">
+
+
+
+
+		INSERT INTO
+		qna(qna_no,
+		qna_title, qna_contents,
+		qna_writedate, qna_hits, qna_who, emp_no
+		)
+		VALUES(qna_no_seq.NEXTVAL,
+		#{qna_title},
+		#{qna_contents},
+		sysdate,
+		0,
+		#{qna_who},
+		#{emp_no}
+		)
+	</insert>
+	<insert id="answerInsert" parameterType="qna">
+
+
+
+
+		INSERT INTO
+		qna(qna_no,
+		qna_title, qna_contents,
+		qna_writedate, qna_openstatus, qna_hits,
+		qna_category,
+		qna_who, emp_no, qna_ref, qna_repos, qna_level,
+		qna_writer
+		)
+		VALUES(qna_no_seq.NEXTVAL,
+		#{qna_title},
+		#{qna_contents},
+		sysdate,
+		1,
+		0,
+		'm5',
+		#{qna_who},
+		#{emp_no},
+		#{qna_ref},
+		#{qna_repos},
+		#{qna_level},
+		'관리자'
+		)
+	</insert>
+	<update id="updateQna" parameterType="qna">
+		update qna set qna_title=
+		#{qna_title} , qna_contents= #{qna_contents} where
+		qna_no = #{qna_no}
+	</update>
+	<update id="updateRePos" parameterType="qna">
+		update qna set qna_repos
+		= qna_repos+1 where qna_ref = #{qna_ref} and
+		qna_repos > #{qna_repos}
+
+
+
+	</update>
+
+	<select id="qnaSelectOne" parameterType="qna" resultType="qna">
+		select
+		QNA_NO
+		,QNA_SHOP_CUSTOMER_NO ,QNA_TITLE ,QNA_CONTENTS ,QNA_WRITEDATE
+		,QNA_OPENSTATUS ,QNA_HITS,QNA_CATEGORY ,EMP_NO ,QNA_WHO
+		,QNA_REF,QNA_REPOS,QNA_LEVEL,QNA_WRITER ,(select c.code_info from code
+		c
+		where
+		c.secondary_code=q.qna_who) as qna_whov,
+		(select z.code_info from
+		code z
+		where z.secondary_code=q.qna_category) as
+		qna_categoryv
+		, (select
+		count(qna_no) from qna r where
+		qna_ref=q.qna_no) as answerComplete from
+		qna q
+		WHERE qna_no=#{qna_no}
+	</select>
+	<delete id="noticeDelete">
+		delete from
+		notice
+		WHERE
+		notice_no in
+		<foreach item="item" collection="array" open="(" close=")"
+			separator=",">
+			#{item}
+		</foreach>
+	</delete>
+
+	<select id="getNoticeList" resultType="notice">
+		select n.* , e.emp_name,
+		(select c.code_info from code c
+		where
+		c.secondary_code=n.notice_who) as
+		notice_whov FROM notice n join
+		employees e on(e.emp_no = n.emp_no)
+		<where>
+			<if test="who != null">and n.NOTICE_who like'%'||#{who}||'%'</if>
+			<if
+				test='searchInput != null and (searchType eq "title".toString())'>and n.notice_title like '%'||#{searchInput}||'%'</if>
+			<if
+				test='searchInput != null and (searchType eq "contents".toString())'>and n.notice_contents like '%'||#{searchInput}||'%'</if>
+			<if
+				test='searchInput != null and (searchType eq "emp_name".toString())'>and e.emp_name like '%'||#{searchInput}||'%'</if>
+			<if test='startDate!=null and startDate!="" '> and n.notice_writedate between #{startDate} and
+				#{endDate}
+			</if>
+
+		</where>
+
+
+	</select>
+
+	<insert id="noticeInsert" parameterType="notice">
+
+
+
+
+		INSERT INTO
+		notice(notice_no, notice_title, notice_contents,
+		notice_writedate,
+		notice_hits, notice_who, emp_no
+		)
+		VALUES(notice_no_seq.NEXTVAL,
+		#{notice_title},
+		#{notice_contents},
+		sysdate,
+		0,
+		#{notice_who},
+		#{emp_no}
+		)
+	</insert>
+	<select id="noticeSelectOne" parameterType="notice"
+		resultType="notice">
+		select n.* , (select c.code_info
+		from code c where
+		c.secondary_code=n.notice_who)notice_whov
+		FROM notice n
+		WHERE
+		notice_no=#{notice_no}
+
+	</select>
+</mapper>

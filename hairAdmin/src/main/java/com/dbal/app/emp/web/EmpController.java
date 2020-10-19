@@ -5,7 +5,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 
-import com.dbal.app.emp.EmpVO;
+import com.dbal.app.emp.EmpVOvo;
 import com.dbal.app.emp.service.EmpService;
 
 @Controller
@@ -16,13 +16,13 @@ public class EmpController  {
     
     //등록폼
     @RequestMapping("insertFormEmp")
-    public String insertFormEmp(EmpVO vo) {
+    public String insertFormEmp(EmpVOvo vo) {
         return "emp/insertEmp";
     }
 
     //등록처리
     @RequestMapping("insertEmp")
-    public String insertEmp(EmpVO vo) {
+    public String insertEmp(EmpVOvo vo) {
         empService.empInsert(vo);
         return "redirect:empList";
     }

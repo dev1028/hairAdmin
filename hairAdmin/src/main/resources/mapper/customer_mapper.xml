@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.dbal.app.emp.mapper.CustomerMapper">
+
+	<select id="getHairshopList" resultType="hairshop">
+		select
+		*
+		from hairshop
+		order by hs_no
+	</select>
+	<select id="getNewHairshopList" resultType="hairshop">
+		select * from
+		hairshop where hs_approval !=1 order by hs_no
+	</select>
+	<select id="getMemberList" resultType="member">
+		select
+		*
+		from members order
+		by mem_no
+	</select>
+	<select id="getDesignerList" resultType="designer">
+		SELECT
+		DESIGNER_NO,DESIGNER_NAME,DESIGNER_PHONE,DESIGNER_EMAIL,DESIGNER_PW,
+		DESIGNER_DAYOFF,WORK_START_TIME,WORK_END_TIME,DESIGNER_ACCESS_STATUS,POSITION,
+		SALARY,INCENTIVE,to_char(HIRE_DATE,'yyyy-mm-dd') as
+		hire_date,HS_NO,DESIGNER_PROFILE,FILE_NAME,hs_name
+		from hairshop h join
+		designer d using(hs_no)
+	</select>
+
+
+</mapper>

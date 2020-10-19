@@ -18,7 +18,7 @@ public class EmpMapperClient {
     
     @Test
     public void getEmp() {
-        EmpVO vo = new EmpVO();
+        EmpVOvo vo = new EmpVOvo();
         //String first_name = empMapper.getName(100);
         //System.out.println(first_name);
         List<Map<String, Object>> list 

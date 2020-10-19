@@ -20,21 +20,21 @@ public class EmpDAOClient {
 
     @Test
     public void empListTest() {
-        EmpVO empVO = new EmpVO(); 
+        EmpVOvo empVO = new EmpVOvo(); 
         //empVO.setDepartment_id("10");
         //empVO.setEmployee_id("100");
         //empVO.setSalary(3000);
         //empVO.setFirst_name("sun");
         empVO.setEmployeeIds(new Integer[] {100,101,102});
-        List<EmpVO> list = dao.getEmpList(empVO);
+        List<EmpVOvo> list = dao.getEmpList(empVO);
         System.out.println(list);
     }
 
     //@Test
     public void getEmp() {
-        EmpVO paraVO = new EmpVO();
+        EmpVOvo paraVO = new EmpVOvo();
         paraVO.setEmployeeId("100");
-        EmpVO resultVO = dao.getEmp(paraVO);
+        EmpVOvo resultVO = dao.getEmp(paraVO);
         System.out.println(resultVO);
     }
 
