@@ -31,7 +31,12 @@ public interface BoardMapper {
 	public int noticeUpdate(NoticeVo vo);
 
 	public NoticeVo noticeSelectOne(NoticeVo vo);
+
 	public List<BoardVo> getBoardList(BoardVo vo);
+
 	public int countNew(BoardVo vo);
+
 	public int countTotal(BoardVo vo);
+
+	public int answerUpdate(QnaVo vo);
 }

@@ -6,11 +6,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.dbal.app.emp.BoardVo;
-import com.dbal.app.emp.CouponVo;
 import com.dbal.app.emp.NoticeVo;
 import com.dbal.app.emp.QnaVo;
 import com.dbal.app.emp.mapper.BoardMapper;
-import com.dbal.app.emp.mapper.CouponDAO;
 import com.dbal.app.emp.service.BoardService;
 
 @Service
@@ -93,6 +91,11 @@ public class BoardServiceImpl implements BoardService {
 	@Override
 	public int countNew(BoardVo vo) {
 		return BoardDAO.countNew(vo);
+	}
+
+	@Override
+	public int answerupdate(QnaVo vo) {
+		return BoardDAO.answerUpdate(vo);
 	}
 
 }

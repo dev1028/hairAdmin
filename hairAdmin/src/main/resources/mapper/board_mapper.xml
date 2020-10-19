@@ -97,6 +97,15 @@
 		'관리자'
 		)
 	</insert>
+	<update id="answerUpdate" parameterType="qna">
+
+
+
+		update qna set
+		qna_title = #{qna_title}, qna_contents = #{qna_contents}
+
+		where qna_no = #{qna_no}
+	</update>
 	<update id="updateQna" parameterType="qna">
 		update qna set qna_title=
 		#{qna_title} , qna_contents= #{qna_contents} where
@@ -204,16 +213,22 @@
 		from board b
 	</select>
 	<select id="countnotice" resultType="board">
-	SELECT (SELECT count(*) FROM notice WHERE to_date(notice_writedate,'yy-mm-dd')
-		=to_date(SYSDATE, 'yy-mm-dd') AND notice_who = #{notice_who} ) AS countnew,
-		(SELECT count(*) FROM qna where notice_who = #{notice_who}) AS counttotal
+		SELECT (SELECT count(*) FROM notice WHERE
+		to_date(notice_writedate,'yy-mm-dd')
+		=to_date(SYSDATE, 'yy-mm-dd') AND
+		notice_who = #{notice_who} ) AS countnew,
+		(SELECT count(*) FROM qna
+		where notice_who = #{notice_who}) AS counttotal
 		FROM DUAL;
 
 	</select>
 	<select id="countQna" resultType="board">
-		SELECT (SELECT count(*) FROM qna WHERE to_date(qna_writedate,'yy-mm-dd')
-		=to_date(SYSDATE, 'yy-mm-dd') AND qna_who = #{qna_who} ) AS countnew,
-		(SELECT count(*) FROM qna where qna_who = #{qna_who}) AS counttotal
+		SELECT (SELECT count(*) FROM
+		qna WHERE to_date(qna_writedate,'yy-mm-dd')
+		=to_date(SYSDATE,
+		'yy-mm-dd') AND qna_who = #{qna_who} ) AS countnew,
+		(SELECT count(*)
+		FROM qna where qna_who = #{qna_who}) AS counttotal
 		FROM DUAL;
 	</select>
 

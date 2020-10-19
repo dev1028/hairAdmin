@@ -41,6 +41,16 @@
 		
 
 		}
+		
+		
+		
+		
+
+			$(".sub").on("click",function(){
+				$("#loginFrm").submit();
+			})
+	
+		
 
 	})
 </script>
@@ -131,7 +141,7 @@
 
 
 									<button type="submit" value="Submit" id="update"
-										class="btn btn-default col-12" style="border: 1px solid gray;">수정</button>
+										class="btn btn-default col-12 sub" style="border: 1px solid gray;">수정</button>
 								</div>
 							</div>
 						</div>
