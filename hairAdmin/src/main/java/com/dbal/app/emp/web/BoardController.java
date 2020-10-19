@@ -5,6 +5,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import com.dbal.app.emp.BoardVo;
 import com.dbal.app.emp.NoticeVo;
 import com.dbal.app.emp.QnaVo;
 import com.dbal.app.emp.service.BoardService;
@@ -86,6 +87,14 @@ public class BoardController {
 	// qna 검색
 	@RequestMapping("/admin/qnaFind.do")
 	public String QnaFind(Model model, QnaVo vo) {
+		model.addAttribute("list", boardService.getQnaList(vo));
+		return "coupon/adminQnaManage";
+	}
+	
+	
+	
+	@RequestMapping("/admin/boardSetting.do")
+	public String boardSetting(Model model, BoardVo vo) {
 		model.addAttribute("list", boardService.getQnaList(vo));
 		return "coupon/adminQnaManage";
 	}

@@ -6,6 +6,7 @@ import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
+import com.dbal.app.emp.BoardVo;
 import com.dbal.app.emp.CouponVo;
 import com.dbal.app.emp.DesignerVo;
 import com.dbal.app.emp.HairshopVo;
@@ -66,5 +67,8 @@ public class BoardDAO {
 
 	public NoticeVo noticeSelectOne(NoticeVo vo) {
 		return mybatis.selectOne("com.dbal.app.emp.mapper.BoardDAO.noticeSelectOne", vo);
+	}
+	public List<BoardVo> getBoardList(BoardVo vo) {
+		return mybatis.selectList("com.dbal.app.emp.mapper.BoardDAO.getBoardList", vo);
 	}
 }

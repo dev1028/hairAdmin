@@ -98,7 +98,7 @@
 
 									<div class="form-group col-6">
 										<label>답변상태</label> <input v-model="model.post.friendlyUrl"
-											type="text" class="form-control" value="${vo.answerStatus }">
+											type="text" class="form-control" value="${vo.answerstatus }">
 									</div>
 								</div>
 

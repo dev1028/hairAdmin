@@ -107,7 +107,7 @@
 						</div>
 
 						<a class="nav-link"
-							href="${pageContext.request.contextPath}/admin/BoardSetting.do">
+							href="${pageContext.request.contextPath}/admin/boardSetting.do">
 							<div class="sb-nav-link-icon">
 								<i class="fas fa-table"></i>
 							</div> 게시판 설정

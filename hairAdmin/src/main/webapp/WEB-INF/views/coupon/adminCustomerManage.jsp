@@ -234,13 +234,13 @@ var thisTr;
 
 										<label for="mem_phone">전화번호</label> <input
 											class="form-control" type="email" name="mem_phone"
-											id="mem_phone" value="" placeholder="이메일을 입력하세요." /> <span
+											id="mem_phone" value="" /> <span
 											id="emailChecking"></span>
 									</div>
 									<div class="form-group">
 										<label for="mem_sex">성별</label> <input class="form-control"
 											type="text" name="mem_sex" id="mem_sex"  value=""
-											placeholder="비밀번호를 입력하세요." />
+											 />
 									</div>
 									<div class="form-group">
 										<label for="mem_name">생년월일</label> <input class="form-control"
