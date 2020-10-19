@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.dbal.app.emp.mapper.CouponMapper">
+	<delete id="couponDelete">
+		delete from hs_coupon
+		where hsc_no in
+		<foreach item="item" collection="array" open="(" close=")"
+			separator=",">
+			#{item}
+		</foreach>
+	</delete>
+	<select id="getCouponList" resultType="coupon">
+		SELECT
+
+		c.*,
+		h.*
+		FROM
+		hs_coupon c
+		JOIN hairshop h ON ( h.hs_no = c.hs_no )
+
+
+
+	</select>
+
+	<insert id="couponInsert" parameterType="coupon">
+
+
+
+
+		INSERT INTO
+		hs_coupon(HSC_NO,HS_NO,HSC_ISSUEDATE,HSC_EXPIREDATE,HSC_COUPON_QUANTITY,HSC_DISCOUNT_RATE,HSC_MAXDISCOUNT_PAY,HSC_NAME
+
+		)
+		VALUES(hsc_no_seq.nextval,#{hs_no},#{hsc_issuedate},
+		#{hsc_expiredate},
+		#{hsc_coupon_quantity},
+		#{hsc_discount_rate},
+		#{hsc_maxdiscount_pay},
+		#{hsc_name})
+	</insert>
+
+
+</mapper>

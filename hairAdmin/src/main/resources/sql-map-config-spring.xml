@@ -3,12 +3,21 @@
   PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
   "http://mybatis.org/dtd/mybatis-3-config.dtd">
 <configuration>
-	<settings>
-		<!-- 오라클 컬럼이 first_name 를 VO firstName 처럼 카멜케이스로 변환 -->
-		<setting name="mapUnderscoreToCamelCase" value="true" />
-	</settings>
+	<!-- <settings>
+		오라클 컬럼이 first_name 를 VO firstName 처럼 카멜케이스로 변환
+		<setting name="mapUnderscoreToCamelCase" value="false" />
+	</settings> -->
 	<typeAliases>
-		<typeAlias type="com.dbal.app.emp.EmpVO" alias="emp"/> 
+		<typeAlias type="com.dbal.app.emp.EmpVo" alias="emp"/> 
+		<typeAlias type="com.dbal.app.emp.CouponVo" alias="coupon"/> 
+		<typeAlias type="com.dbal.app.emp.HairshopVo" alias="hairshop"/> 
+		<typeAlias type="com.dbal.app.emp.BoardVo" alias="board"/> 
+		<typeAlias type="com.dbal.app.emp.NoticeVo" alias="notice"/> 
+		<typeAlias type="com.dbal.app.emp.QnaVo" alias="qna"/> 
+		<typeAlias type="com.dbal.app.emp.DesignerVo" alias="designer"/> 
+		<typeAlias type="com.dbal.app.emp.MembersVo" alias="member"/> 
+		<typeAlias type="com.dbal.app.emp.AnalysisVo" alias="analysis"/> 
+		<typeAlias type="com.dbal.app.emp.TtCategoryVo" alias="ttcategory"/> 
 	</typeAliases>
 
 </configuration>

@@ -4,13 +4,13 @@ import java.util.List;
 
 import org.springframework.stereotype.Service;
 
-import com.dbal.app.emp.EmpVO;
+import com.dbal.app.emp.EmpVOvo;
 
 
 public interface EmpService {
 
-	public EmpVO getEmp(EmpVO empVO);
-	public List<EmpVO> getEmpList(EmpVO empVO);
-	public void empInsert(EmpVO empVO);
+	public EmpVOvo getEmp(EmpVOvo empVO);
+	public List<EmpVOvo> getEmpList(EmpVOvo empVO);
+	public void empInsert(EmpVOvo empVO);
 	
 }
