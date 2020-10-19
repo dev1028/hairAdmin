@@ -23,11 +23,16 @@ public class BoardController {
 		return "redirect:noticeManage.do";
 	}
 
-	// 공지사항 등록
-	@RequestMapping("/admin/adminBoardInsertSubmit.do")
+	// 공지사항 수정
+	@RequestMapping("/admin/noticeUpdate.do")
+	public String updateNotice(NoticeVo vo) {
+		boardService.noticeUpdate(vo);
+		return "redirect:adminNoticeView.do";
+	}	// 공지사항 등록
+	@RequestMapping("/admin/noticeInsert.do")
 	public String insertNotice(NoticeVo vo) {
 		boardService.noticeInsert(vo);
-		return "redirect:adminBoardManage";
+		return "redirect:adminNoticeManage";
 	}
 
 	// 공지사항 검색
@@ -36,7 +41,12 @@ public class BoardController {
 		model.addAttribute("list", boardService.getNoticeList(vo));
 		return "coupon/adminNoticeManage";
 	}
-
+	// 공지사항 상세
+	@RequestMapping("/admin/adminNoticeView.do")
+	public String noticeView(Model model, NoticeVo vo) {
+		model.addAttribute("vo", boardService.noticeSelectOne(vo));
+		return "coupon/adminNoticeView";
+	}
 	// 공지사항 목록
 	@RequestMapping("/admin/noticeManage.do")
 	public String noticeList(Model model) {
@@ -94,8 +104,21 @@ public class BoardController {
 	
 	
 	@RequestMapping("/admin/boardSetting.do")
-	public String boardSetting(Model model, BoardVo vo) {
-		model.addAttribute("list", boardService.getQnaList(vo));
+	public String boardSetting(Model model, BoardVo vo ) {
+		model.addAttribute("list", boardService.getBoardList(vo));
 		return "coupon/adminQnaManage";
 	}
+
+	
+	@RequestMapping("/admin/boardSetting.do")
+	public String boardCount(Model model, BoardVo vo ) {
+		
+		boardService.countNew(vo);
+		
+		
+		
+		model.addAttribute("list", boardService.getBoardList(vo));
+		return "coupon/adminQnaManage";
+	}
+
 }

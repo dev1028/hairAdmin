@@ -68,7 +68,18 @@ public class BoardDAO {
 	public NoticeVo noticeSelectOne(NoticeVo vo) {
 		return mybatis.selectOne("com.dbal.app.emp.mapper.BoardDAO.noticeSelectOne", vo);
 	}
+
 	public List<BoardVo> getBoardList(BoardVo vo) {
 		return mybatis.selectList("com.dbal.app.emp.mapper.BoardDAO.getBoardList", vo);
 	}
+
+	public List<BoardVo> countQna(BoardVo vo) {
+		return mybatis.selectList("com.dbal.app.emp.mapper.BoardDAO.countQna", vo);
+
+	}
+
+	public List<BoardVo>countNotice(BoardVo vo){
+		return mybatis.selectList("com.dbal.app.emp.mapper.BoardDAO.countNotice",vo);
+	}
+
 }

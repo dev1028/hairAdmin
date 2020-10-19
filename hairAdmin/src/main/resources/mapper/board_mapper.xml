@@ -39,7 +39,7 @@
 				test='searchInput != null and (searchType eq "title".toString())'>and q.qna_title like '%'||#{searchInput}||'%'</if>
 			<if
 				test='searchInput != null and (searchType eq "contents".toString())'>and q.qna_contents like '%'||#{searchInput}||'%'</if>
-			
+
 			<if test='startDate!=null and startDate!="" '> and q.qna_writedate between #{startDate} and
 				#{endDate}
 			</if>
@@ -194,4 +194,31 @@
 		notice_no=#{notice_no}
 
 	</select>
+	<select id="getBoardList" resultType="board">
+		select
+		BOARD_ID,BOARD_TYPE,BOARD_WHO,BOARD_READABLE,BOARD_WRITTABLE ,
+		(select
+		c.code_info
+		from code c
+		where c.secondary_code=b.board_who) "board_whov"
+		from board b
+	</select>
+	<select id="countnotice" resultType="board">
+	SELECT (SELECT count(*) FROM notice WHERE to_date(notice_writedate,'yy-mm-dd')
+		=to_date(SYSDATE, 'yy-mm-dd') AND notice_who = #{notice_who} ) AS countnew,
+		(SELECT count(*) FROM qna where notice_who = #{notice_who}) AS counttotal
+		FROM DUAL;
+
+	</select>
+	<select id="countQna" resultType="board">
+		SELECT (SELECT count(*) FROM qna WHERE to_date(qna_writedate,'yy-mm-dd')
+		=to_date(SYSDATE, 'yy-mm-dd') AND qna_who = #{qna_who} ) AS countnew,
+		(SELECT count(*) FROM qna where qna_who = #{qna_who}) AS counttotal
+		FROM DUAL;
+	</select>
+
+	<update id="noticeUpdate">
+		update notice set notice_title=#{notice_title},
+		notice_contents=#{notice_contents} where notice_no = #{notice_no}
+	</update>
 </mapper>
