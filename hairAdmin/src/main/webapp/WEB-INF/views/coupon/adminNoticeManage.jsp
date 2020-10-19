@@ -199,7 +199,7 @@
 				<button type="submit" value="0" id="delete">삭제</button>
 
 				<div class="table-responsive" id="result">
-					<table class="table table-bordered" id="dataTable" width="100%"
+					<table class="table table-bordered table table-hover table-outline table-vcenter text-nowrap card-table" id="dataTable" width="100%"
 						cellspacing="0">
 						<thead>
 							<tr>

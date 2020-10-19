@@ -332,7 +332,7 @@
 		<div class="form-group" id="">
 			<form action="${pageContext.request.contextPath}/admin/qnaDelete.do">
 
-				<button type="submit" value="0" id="delete">삭제</button>
+				
 				<!-- <div class="form-group" id="result"> -->
 				<div class="table-responsive" id="result">
 					<table class="table table-bordered" id="dataTabl" width="100%"
@@ -374,10 +374,14 @@
 											<c:when test="${l.answerstatus==1 }">미답변</c:when>
 										</c:choose></td>
 									<td><c:if test="${l.qna_category !='m5' }">
-											<button
-												onclick="location.href = 'adminQnaView.do?qna_no=${ l.qna_no}'">답변하기
+											<button	class="btn btn-default " style="border: 1px solid gray;"
+											type="button"	onclick="location.href = 'qnaView.do?qna_no=${ l.qna_no}'">답변하기
 											</button>
 										</c:if></td>
+
+									<%-- 
+										<a
+										href="${pageContext.request.contextPath}/admin/qnaView.do?qna_no=${ l.qna_no}"></a> --%>
 									<%-- <td>${ l.qna_answer}</td> --%>
 									<td>${ l.qna_writedate}</td>
 									<td>${ l.qna_hits}</td>
@@ -386,7 +390,8 @@
 							</c:forEach>
 						</tbody>
 					</table>
-					<button id="excel">excel</button>
+					<button type="submit" value="0" id="delete" class="btn btn-default " style="border: 1px solid gray;">삭제</button>
+					<button id="excel" class="btn btn-default " style="border: 1px solid gray;">excel</button>
 				</div>
 			</form>
 		</div>

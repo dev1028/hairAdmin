@@ -18,8 +18,6 @@ public interface BoardService {
 
 	public int answerInsert(QnaVo vo);
 
-
-
 	public int updateRePos(QnaVo vo);
 
 	public QnaVo qnaSelectOne(QnaVo vo);
@@ -33,10 +31,14 @@ public interface BoardService {
 	public int noticeUpdate(NoticeVo vo);
 
 	public NoticeVo noticeSelectOne(NoticeVo vo);
-	
-	
-	
+
 	public List<BoardVo> getBoardList(BoardVo vo);
+
 	public int countTatal(BoardVo vo);
+
 	public int countNew(BoardVo vo);
+
+	public int answerupdate(QnaVo vo);
+
+	
 }

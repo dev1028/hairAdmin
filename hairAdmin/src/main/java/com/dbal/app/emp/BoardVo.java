@@ -34,7 +34,8 @@ public String notice_whov;
 	public String notice_categoryname;
 	public String notice_categorynamev;
 	
-	
+	public String countnew;
+	public String counttotal;
 	
 	
 	

@@ -28,7 +28,7 @@ src="adminQnaView.js"></script> -->
 
 	<h2 class="heading">notice</h2>
 	<form
-		action="${pageContext.request.contextPath}/admin/adminQnaAnswer.do">
+		action="${pageContext.request.contextPath}/admin/noticeUpdate.do">
 
 		<div class="row">
 			<div class="col-6">
@@ -52,7 +52,7 @@ src="adminQnaView.js"></script> -->
 							</div>
 							<div class="form-group col-6">
 								<label>조회수 </label> <input v-model="model.post.title"
-									class="form-control" name="qna_hits"
+									class="form-control" name="notice_hits"
 									value=" ${vo.notice_hits }">
 							</div>
 						</div>
@@ -80,7 +80,7 @@ src="adminQnaView.js"></script> -->
 
 						<div class="form-group">
 							<label>내용</label>
-							<textarea v-model="model.post.body" name="qna_contents"
+							<textarea v-model="model.post.body" name="notice_contents"
 								class="col-12 form-control" rows="10">${vo.notice_contents }</textarea>
 						</div>
 						<div class="form-group ">
