@@ -54,7 +54,7 @@ public class MainController {
 		return "coupon/adminMain";
 	}
 
-	@RequestMapping(value = "/logoutProcess")
+	@RequestMapping(value = "/login/logoutProcess")
 	public String logoutProcess(HttpSession session) {
 
 		session.setAttribute("loginCheck", null);

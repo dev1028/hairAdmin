@@ -78,8 +78,13 @@ var thisTr;
 			
 				$("#hs_name").val(empOne.hs_name);
 				$("#designer_profile").val(empOne.desginer_profile);
-				$("#designer_access_status").val(empOne.designer_access_status);
+				if(empOne.designer_access_status==='1'){
+					
+				$("#designer_access_status").val("인증완료");
 				
+				}else{
+					$("#designer_access_status").val("미인증");
+				}
 				$("#myModal").modal('toggle');
 				clickcnt = 0;
 			} else if(clickcnt == 1 && $(this).attr("id") != thisTr.attr("id")){
@@ -193,8 +198,8 @@ var thisTr;
 					</tr>
 				</thead>
 				<tbody id="tbody">
-		
-				
+
+
 					<c:forEach items="${list }" var="l">
 						<tr id="${l.designer_no }">
 
@@ -269,16 +274,16 @@ var thisTr;
 											id="designer_dayoff" value="" placeholder="비밀번호를 입력하세요." />
 									</div>
 									<div class="form-group row">
-									<div class="form-group col-6">
-										<label for="designer_name">근무시간</label> <input
-											class="form-control" type="text" name="designer_name"
-											id="work_start_time" value="" />
-								<!-- 	</div>
+										<div class="form-group col-6">
+											<label for="designer_name">근무시간</label> <input
+												class="form-control" type="text" name="designer_name"
+												id="work_start_time" value="" />
+											<!-- 	</div>
 									<div class="form-group col-6"> -->
-										<label for="designer_name"></label> <input
-											class="form-control" type="text" name="designer_name"
-											id="work_end_time" value="" />
-									</div>
+											<label for="designer_name"></label> <input
+												class="form-control" type="text" name="designer_name"
+												id="work_end_time" value="" />
+										</div>
 									</div>
 									<div class="form-group">
 										<label for="designer_tel">직급</label> <input

@@ -57,7 +57,7 @@
 						class="dropdown-item" href="#">내가쓴 글</a>
 					<div class="dropdown-divider"></div>
 					<a class="dropdown-item"
-						href="${pageContext.request.contextPath}/logoutProcess">로그아웃</a>
+						href="${pageContext.request.contextPath}/login/logoutProcess">로그아웃</a>
 				</div></li>
 		</ul>
 	</nav>
@@ -107,7 +107,7 @@
 						</div>
 
 						<a class="nav-link"
-							href="${pageContext.request.contextPath}/admin/BoardSetting.do">
+							href="${pageContext.request.contextPath}/admin/boardSetting.do">
 							<div class="sb-nav-link-icon">
 								<i class="fas fa-table"></i>
 							</div> 게시판 설정

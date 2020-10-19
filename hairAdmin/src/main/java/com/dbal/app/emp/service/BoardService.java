@@ -2,6 +2,7 @@ package com.dbal.app.emp.service;
 
 import java.util.List;
 
+import com.dbal.app.emp.BoardVo;
 import com.dbal.app.emp.NoticeVo;
 import com.dbal.app.emp.QnaVo;
 
@@ -17,8 +18,6 @@ public interface BoardService {
 
 	public int answerInsert(QnaVo vo);
 
-
-
 	public int updateRePos(QnaVo vo);
 
 	public QnaVo qnaSelectOne(QnaVo vo);
@@ -32,4 +31,14 @@ public interface BoardService {
 	public int noticeUpdate(NoticeVo vo);
 
 	public NoticeVo noticeSelectOne(NoticeVo vo);
+
+	public List<BoardVo> getBoardList(BoardVo vo);
+
+	public int countTatal(BoardVo vo);
+
+	public int countNew(BoardVo vo);
+
+	public int answerupdate(QnaVo vo);
+
+	
 }

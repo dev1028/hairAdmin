@@ -72,7 +72,12 @@
 					$("#hs_dayoff").val(empOne.hs_dayoff);
 					$("#hs_starttime").val(empOne.hs_starttime);
 					$("#hs_endtime").val(empOne.hs_endtime);
-					$("#hs_parking").val(empOne.hs_parking);
+					if(empOne.hs_parking=='1'){
+						$("#hs_parking").val("주차가능");
+					}else{
+					$("#hs_parking").val("주차불가");
+						
+					}
 					$("#hs_etc").val(empOne.hs_etc);
 					$("#hs_regdate").val(empOne.hs_regdate);
 					

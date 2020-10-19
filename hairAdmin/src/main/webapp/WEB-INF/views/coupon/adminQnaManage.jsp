@@ -70,8 +70,7 @@
 								$("#category").html("");
 								//			category = $("<select/>").attr('id', 'category');
 								$("#category").append(
-										$("<option />").text("전체카테고리").val(
-												""));
+										$("<option />").text("전체카테고리").val(""));
 								$("#category").append(
 										$("<option />").text("입점문의").val("a1"));
 								$("#category").append(
@@ -85,8 +84,7 @@
 
 								$("#category").html("");
 								$("#category").append(
-										$("<option />").text("전체카테고리").val(
-												""));
+										$("<option />").text("전체카테고리").val(""));
 								$("#category").append(
 										$("<option />").text("예약관련문의")
 												.val("m1"));
@@ -302,7 +300,7 @@
 							<option value="title">제목</option>
 							<option value="contents">내용</option>
 							<!-- <option value="writer">작성자</option> -->
-						
+
 						</select> <input type="text" id="searchVal" name="searchVal"
 							class="form-control ">
 
@@ -334,7 +332,7 @@
 		<div class="form-group" id="">
 			<form action="${pageContext.request.contextPath}/admin/qnaDelete.do">
 
-				<button type="submit" value="0" id="delete">삭제</button>
+				
 				<!-- <div class="form-group" id="result"> -->
 				<div class="table-responsive" id="result">
 					<table class="table table-bordered" id="dataTabl" width="100%"
@@ -358,7 +356,8 @@
 							<c:forEach items="${list }" var="l">
 								<tr>
 
-									<td><input type="checkbox" class="chk" name = "qna_no"  value="${l.qna_no }"></td>
+									<td><input type="checkbox" class="chk" name="qna_no"
+										value="${l.qna_no }"></td>
 									<td>${ l.qna_whov}</td>
 									<td>${ l.qna_no}</td>
 									<td>${ l.qna_categoryv}</td>
@@ -369,12 +368,20 @@
 	&nbsp;&nbsp;&nbsp;&nbsp;RE :
 	</c:if> <a
 										href="${pageContext.request.contextPath}/admin/qnaView.do?qna_no=${ l.qna_no}">${ l.qna_title}</a></td>
-									<td>${l.answerstatus }</td>
+
+									<td><c:choose>
+											<c:when test="${l.answerstatus >1}">답변완료</c:when>
+											<c:when test="${l.answerstatus==1 }">미답변</c:when>
+										</c:choose></td>
 									<td><c:if test="${l.qna_category !='m5' }">
-											<button
-												onclick="location.href = 'adminQnaView.do?qna_no=${ l.qna_no}'">답변하기
+											<button	class="btn btn-default " style="border: 1px solid gray;"
+											type="button"	onclick="location.href = 'qnaView.do?qna_no=${ l.qna_no}'">답변하기
 											</button>
 										</c:if></td>
+
+									<%-- 
+										<a
+										href="${pageContext.request.contextPath}/admin/qnaView.do?qna_no=${ l.qna_no}"></a> --%>
 									<%-- <td>${ l.qna_answer}</td> --%>
 									<td>${ l.qna_writedate}</td>
 									<td>${ l.qna_hits}</td>
@@ -383,7 +390,8 @@
 							</c:forEach>
 						</tbody>
 					</table>
-					<button id="excel">excel</button>
+					<button type="submit" value="0" id="delete" class="btn btn-default " style="border: 1px solid gray;">삭제</button>
+					<button id="excel" class="btn btn-default " style="border: 1px solid gray;">excel</button>
 				</div>
 			</form>
 		</div>

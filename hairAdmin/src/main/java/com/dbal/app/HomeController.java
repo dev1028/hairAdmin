@@ -30,7 +30,7 @@ public class HomeController {
 
 	
 
-		return "/login/adminLogin";
+		return "login/adminLogin";
 	}
 
 
