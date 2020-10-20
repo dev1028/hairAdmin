@@ -76,6 +76,21 @@
 <script type="text/javascript">
 	$(function() {
 		$('#dataTabl').dataTable({
+			language : {
+				"emptyTable" : "일치하는 데이터가 없습니다",
+				"lengthMenu" : "페이지당 _MENU_ 개씩 보기",
+				"info" : "현재 _START_ - _END_ / _TOTAL_건",
+				"infoEmpty" : "데이터 없음",
+				"infoFiltered" : "( _MAX_건의 데이터에서 필터링됨 )",
+				"search" : "에서 검색: ",
+				"zeroRecords" : "일치하는 데이터가 없습니다",
+				"loadingRecords" : "로딩중...",
+				"processing" : "잠시만 기다려 주세요...",
+				"paginate" : {
+					"next" : "다음",
+					"previous" : "이전"
+				}
+			},
 			fixedColumns : {
 				leftColumns : 10,
 				heightMatch : 'none'
@@ -384,23 +399,13 @@
 										<div class="col">
 											<input type="text" id="searchVal" name="searchVal"
 												class="form-control ">
-										</div> <div class="btn-list justify-content-end">
-
-							<button type="submit" value="Submit" id="submit"
-								class="btn btn-white btn-secondary btn-lg">검색</button>
-						</div> 
-										<div class="col-3">
-											<a href="#" class="btn btn-white btn-icon"
-												aria-label="Button"> <svg
-													xmlns="http://www.w3.org/2000/svg" class="icon" width="24"
-													height="24" viewBox="0 0 24 24" stroke-width="2"
-													stroke="currentColor" fill="none" stroke-linecap="round"
-													stroke-linejoin="round">
-									<path stroke="none" d="M0 0h24v24H0z"></path>
-									<circle cx="10" cy="10" r="7"></circle>
-									<line x1="21" y1="21" x2="15" y2="15"></line></svg>
-											</a>
 										</div>
+										<div class="btn-list justify-content-end col-3">
+
+											<button type="submit" value="Submit" id="submit"
+												class="btn btn-white btn-secondary btn-lg ">검색</button>
+										</div>
+
 
 									</div>
 
@@ -408,14 +413,20 @@
 							</tr>
 						</table>
 					</form>
-					
+
 				</div>
 			</div>
 		</div>
 		<div class="col">
 			<div class="card">
-				<div class="card-header">
+				<div class="card-header d-flex">
 					<h3 class="card-title">QnA 게시글 목록</h3>
+					<!-- <div class="btn-list justify-content-end text-right d-flex">
+						<button type="submit" value="0" id="delete"
+							class="btn btn-default btn btn-primary ml-auto" style="border: 1px solid gray;">삭제</button>
+						<button id="excel" class="btn btn-default "
+							style="border: 1px solid gray;">excel</button>
+					</div> -->
 				</div>
 				<!-- <div class="form-group" id="result"> -->
 				<div class="table-responsive" id="result">
@@ -482,8 +493,8 @@
 							class="btn btn-default " style="border: 1px solid gray;">삭제</button>
 						<button id="excel" class="btn btn-default "
 							style="border: 1px solid gray;">excel</button>
+					</form>
 				</div>
-				</form>
 			</div>
 		</div>
 		<!-- <button type="button" id="excel">excel</button> -->
