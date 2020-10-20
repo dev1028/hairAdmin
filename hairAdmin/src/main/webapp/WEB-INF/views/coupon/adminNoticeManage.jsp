@@ -109,7 +109,167 @@
 	<div class="container">
 
 		<h2 class="heading">공지사항 게시판 관리</h2>
+
+
+
+<div class="col">
+				<div class="card">
+					<div class="card-header">
+						<h3 class="card-title">게시글 조회</h3>
+					</div>
+
+					<div class="table-responsive" id="result">
 		<form action="${pageContext.request.contextPath}/admin/noticeFind.do">
+
+						<table
+							class='table table-bordered table-sm text-center  table card-table table-vcenter text-nowrap datatable'>
+
+
+
+							<tr>
+								<td>기간선택</td>
+								<td colspan="4">
+									<!-- 	<div class="row row-sm align-items-center mb-3"> --> <!-- <div class="col"> -->
+									<div class="input-group">
+										<div class="col">
+											<button type="button" value="0" class="dateBtn form-control "
+												id="all">전체</button>
+										</div>
+										<div class="col">
+											<button type="button" value="0" class='dateBtn form-control'
+												id="today">오늘</button>
+										</div>
+										<div class="col">
+											<button type="button" value="3" class='dateBtn form-control'
+												id="three">3일</button>
+										</div>
+										<div class="col">
+											<button type="button" value="7" class='dateBtn form-control'
+												id="seven">7일</button>
+										</div>
+										<div class="col">
+
+
+
+											<button type="button" value="30" class='dateBtn form-control'
+												id="month">1개월</button>
+										</div>
+										<div class="col-3">
+
+
+											<input type="date" id="start" name="startDate"
+												class="form-control">
+										</div>
+										-
+										<div class="col-3">
+											<input type="date" id="end" name="endDate"
+												class="form-control">
+
+										</div>
+
+
+
+
+
+									</div>
+
+								</td>
+							</tr>
+
+							<tr>
+								<td>사용자</td>
+								<td><div class="">
+										<select name="who" id="who" class="form-control">
+											<option class="form-control form-check-input" value="">전체사용자</option>
+											<option class="form-control form-check-input" value="j1">미용실</option>
+											<option class="form-control form-check-input" value="j2">일반회원</option>
+											<option class="form-control form-check-input" value="j3">디자이너</option>
+										</select>
+
+
+									</div></td>
+							
+							</tr>
+
+						
+							<tr>
+								<td><label>게시글 찾기</label></td>
+								<td colspan="4">
+									<div class="input-group">
+
+										<div class="col">
+
+											<select name="searchType" id="searchType"
+												class="form-control ">
+												<option value="title">제목</option>
+												<option value="contents">내용</option>
+
+
+											</select>
+										</div>
+										<div class="col">
+											<input type="text" id="searchVal" name="searchVal"
+												class="form-control ">
+										</div>
+										<div class="col-3">
+											<a href="#" class="btn btn-white btn-icon"
+												aria-label="Button"> <svg
+													xmlns="http://www.w3.org/2000/svg" class="icon" width="24"
+													height="24" viewBox="0 0 24 24" stroke-width="2"
+													stroke="currentColor" fill="none" stroke-linecap="round"
+													stroke-linejoin="round">
+									<path stroke="none" d="M0 0h24v24H0z"></path>
+									<circle cx="10" cy="10" r="7"></circle>
+									<line x1="21" y1="21" x2="15" y2="15"></line></svg>
+											</a>
+										</div>
+
+									</div>
+									</div>
+									</div>
+									</div>
+									</div>
+									</div>
+								</td>
+							</tr>
+
+
+
+
+
+						</table>
+
+
+						<!-- <div class="btn-list justify-content-end">
+
+							<button type="submit" value="Submit" id="submit"
+								class="btn btn-white btn-secondary btn-lg">검색</button>
+						</div> -->
+
+					</div>
+
+				</div>
+
+			</div>
+	</div>
+
+	</form>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 			<div class="form-group">
 

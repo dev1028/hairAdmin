@@ -18,12 +18,72 @@
 <link href="/hairapp/decorator/ges/dist/css/styles.css" rel="stylesheet" />
 
 <link rel="stylesheet"
-	href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
-<link rel="stylesheet"
-	href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
-
+	href="https://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+<link
+	href="${pageContext.request.contextPath}/decorator/ges/dist/css/styles.css"
+	rel="stylesheet" />
+<link
+	href="${pageContext.request.contextPath}/decorator/ges/dist/css/styles.css"
+	rel="stylesheet" />
+<link
+	href="https://cdn.datatables.net/1.10.20/css/dataTables.bootstrap4.min.css"
+	rel="stylesheet" crossorigin="anonymous" />
+<%-- <script
+	src="${pageContext.request.contextPath}/decorator/tabler-gh-pages/assets/js/require.min.js"></script> --%>
 <script src="https://code.jquery.com/jquery-3.5.1.min.js"
 	crossorigin="anonymous"></script>
+<script
+	src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.13.0/js/all.min.js"
+	crossorigin="anonymous"></script>
+<script
+	src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.bundle.min.js"
+	crossorigin="anonymous"></script>
+<script
+	src="${pageContext.request.contextPath}/decorator/ges/dist/js/scripts.js"></script>
+<script
+	src="https://cdn.datatables.net/1.10.20/js/jquery.dataTables.min.js"
+	crossorigin="anonymous"></script>
+<script
+	src="https://cdn.datatables.net/1.10.20/js/dataTables.bootstrap4.min.js"
+	crossorigin="anonymous"></script>
+<script
+	src="${pageContext.request.contextPath}/decorator/ges/dist/assets/demo/datatables-demo.js"></script>
+
+<link rel="stylesheet"
+	href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+<link rel="stylesheet"
+	href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,300i,400,400i,500,500i,600,600i,700,700i&amp;subset=latin-ext">
+
+
+<script>
+	requirejs
+			.config({
+				baseUrl : "${pageContext.request.contextPath}/decorator/tabler-gh-pages"
+			});
+</script>
+<!-- Dashboard Core -->
+<link
+	href="${pageContext.request.contextPath}/decorator/tabler-gh-pages/assets/css/dashboard.css"
+	rel="stylesheet" />
+<script
+	src="${pageContext.request.contextPath}/decorator/tabler-gh-pages/assets/js/dashboard.js"></script>
+<!-- c3.js Charts Plugin -->
+<link
+	href="${pageContext.request.contextPath}/decorator/tabler-gh-pages/assets/plugins/charts-c3/plugin.css"
+	rel="stylesheet" />
+<script
+	src="${pageContext.request.contextPath}/decorator/tabler-gh-pages/assets/plugins/charts-c3/plugin.js"></script>
+<!-- Google Maps Plugin -->
+<link
+	href="${pageContext.request.contextPath}/decorator/tabler-gh-pages/assets/plugins/maps-google/plugin.css"
+	rel="stylesheet" />
+<script
+	src="${pageContext.request.contextPath}/decorator/tabler-gh-pages/assets/plugins/maps-google/plugin.js"></script>
+<!-- Input Mask Plugin -->
+<script
+	src="${pageContext.request.contextPath}/decorator/tabler-gh-pages/assets/plugins/input-mask/plugin.js"></script>
+
+
 <script
 	src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.13.0/js/all.min.js"
 	crossorigin="anonymous"></script>

@@ -12,33 +12,119 @@
 	href="${pageContext.request.contextPath}/decorator/ges/dist/css/styles.css"
 	rel="stylesheet" />
 <link
+	href="${pageContext.request.contextPath}/decorator/ges/dist/css/styles.css"
+	rel="stylesheet" />
+<link
 	href="https://cdn.datatables.net/1.10.20/css/dataTables.bootstrap4.min.css"
 	rel="stylesheet" crossorigin="anonymous" />
+<script
+	src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.13.0/js/all.min.js"
+	crossorigin="anonymous"></script>
+<script
+	src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.bundle.min.js"
+	crossorigin="anonymous"></script>
+<script
+	src="${pageContext.request.contextPath}/decorator/ges/dist/js/scripts.js"></script>
+<script
+	src="https://cdn.datatables.net/1.10.20/js/jquery.dataTables.min.js"
+	crossorigin="anonymous"></script>
+<script
+	src="https://cdn.datatables.net/1.10.20/js/dataTables.bootstrap4.min.js"
+	crossorigin="anonymous"></script>
+<script
+	src="${pageContext.request.contextPath}/decorator/ges/dist/assets/demo/datatables-demo.js"></script>
 
+<link rel="stylesheet"
+	href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+<link rel="stylesheet"
+	href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,300i,400,400i,500,500i,600,600i,700,700i&amp;subset=latin-ext">
 <script type="text/javascript"
 	src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.24.0/moment.min.js"></script>
+<%-- <script
+	src="${pageContext.request.contextPath}/decorator/tabler-gh-pages/assets/js/require.min.js"></script>
+--%>
+<script>
+	requirejs
+			.config({
+				baseUrl : "${pageContext.request.contextPath}/decorator/tabler-gh-pages"
+			});
+</script>
+<!-- Dashboard Core -->
+<link
+	href="${pageContext.request.contextPath}/decorator/tabler-gh-pages/assets/css/dashboard.css"
+	rel="stylesheet" />
+<script
+	src="${pageContext.request.contextPath}/decorator/tabler-gh-pages/assets/js/dashboard.js"></script>
+<!-- c3.js Charts Plugin -->
+<link
+	href="${pageContext.request.contextPath}/decorator/tabler-gh-pages/assets/plugins/charts-c3/plugin.css"
+	rel="stylesheet" />
+<script
+	src="${pageContext.request.contextPath}/decorator/tabler-gh-pages/assets/plugins/charts-c3/plugin.js"></script>
+<!-- Google Maps Plugin -->
+<link
+	href="${pageContext.request.contextPath}/decorator/tabler-gh-pages/assets/plugins/maps-google/plugin.css"
+	rel="stylesheet" />
+<script
+	src="${pageContext.request.contextPath}/decorator/tabler-gh-pages/assets/plugins/maps-google/plugin.js"></script>
+<!-- Input Mask Plugin -->
+<script
+	src="${pageContext.request.contextPath}/decorator/tabler-gh-pages/assets/plugins/input-mask/plugin.js"></script>
+
+
 
 <script type="text/javascript">
 	$(function() {
 		$('#dataTabl').dataTable({
-
+			fixedColumns : {
+				leftColumns : 10,
+				heightMatch : 'none'
+			},
 			"paging" : true, //페이징처리
 			"ordering" : true, //칼럼별 정렬기능
 			//"autoWidth": false, //가로자동
 			"lengthChange" : false, //데이터건수 변경
 			"pageLength" : 25, //기본 데이터건수
 			//"lengthMenu": [[50, 100, 1000], [50, 100, "Max(1000)"]], //데이터건수옵션
-			// "order": [15,'desc'], //기본 정렬칼럼
+			// "order": [2,'desc'], //기본 정렬칼럼
 			"searching" : false, //검색
 			"columnDefs" : [//칼럼조작
 			//가로길이         //칼럼제목   //데이터타겟    //해당칼럼만 정렬기능사용안함
 			{
 				"width" : "1em",
-				"targets" : 1,
+				"targets" : 0,
 				"orderable" : false
 			}, {
 				"width" : "1em",
+				"targets" : 1,
+				"orderable" : true
+			}, {
+				"width" : "1em",
 				"targets" : 2
+			}, {
+				"width" : "1em",
+				"targets" : 3,
+				"orderable" : true
+			}, {
+				"width" : "1em",
+				"targets" : 4,
+				"orderable" : false
+			}, {
+				"width" : "1em",
+				"targets" : 5,
+				"orderable" : true
+			}, {
+				"width" : "1em",
+				"targets" : 6,
+				"orderable" : false
+			}, {
+				"width" : "1em",
+				"targets" : 7,
+				"orderable" : true
+			}, {
+				"width" : "1em",
+				"targets" : 8,
+				"orderable" : true
 			} ]
 		});
 		$("#start").attr('value', '');
@@ -187,217 +273,221 @@
 	crossorigin="anonymous"></script>
 </head>
 <body>
+	<br>
+	<br>
 	<div class="container">
 
 		<h5 class="heading">qna 게시판 관리</h5>
-
-
-		<form action="${pageContext.request.contextPath}/admin/qnaFind.do">
-
-			<div class="form-group">
-
-				<div class="row">
-
-					<div class="col-2">
-						<label for="name">기간 </label>
-					</div>
-					<div class="col">
-
-						<button type="button" value="0" class="dateBtn form-control "
-							id="all">전체</button>
-					</div>
-					<div class="col">
-						<button type="button" value="0" class='dateBtn form-control'
-							id="today">오늘</button>
-					</div>
-					<div class="col">
-						<button type="button" value="3" class='dateBtn form-control'
-							id="three">3일</button>
-					</div>
-					<div class="col">
-						<button type="button" value="7" class='dateBtn form-control'
-							id="seven">7일</button>
-					</div>
-					<div class="col">
-						<button type="button" value="30" class='dateBtn form-control'
-							id="month">1개월</button>
-					</div>
-					<div class="col-2">
-						<input type="date" id="start" name="startDate"
-							class="form-control">
-					</div>
-					<div class="col-2">
-						<input type="date" id="end" name="endDate" class="form-control">
-					</div>
+		<div class="col">
+			<div class="card">
+				<div class="card-header">
+					<h3 class="card-title">게시글 조회</h3>
 				</div>
 
+				<div class="table-responsive" id="result">
+					<form action="${pageContext.request.contextPath}/admin/qnaFind.do">
+
+						<table
+							class='table table-bordered table-sm text-center  table card-table table-vcenter text-nowrap datatable'>
+							<tr>
+								<td>기간선택</td>
+								<td colspan="4">
+									<!-- 	<div class="row row-sm align-items-center mb-3"> --> <!-- <div class="col"> -->
+									<div class="input-group">
+										<div class="col">
+											<button type="button" value="0" class="dateBtn form-control "
+												id="all">전체</button>
+										</div>
+										<div class="col">
+											<button type="button" value="0" class='dateBtn form-control'
+												id="today">오늘</button>
+										</div>
+										<div class="col">
+											<button type="button" value="3" class='dateBtn form-control'
+												id="three">3일</button>
+										</div>
+										<div class="col">
+											<button type="button" value="7" class='dateBtn form-control'
+												id="seven">7일</button>
+										</div>
+										<div class="col">
+											<button type="button" value="30" class='dateBtn form-control'
+												id="month">1개월</button>
+										</div>
+										<div class="col-3">
 
 
+											<input type="date" id="start" name="startDate"
+												class="form-control">
+										</div>
+										-
+										<div class="col-3">
+											<input type="date" id="end" name="endDate"
+												class="form-control">
+										</div>
+
+									</div>
+
+								</td>
+							</tr>
+
+							<tr>
+								<td>사용자</td>
+								<td><div class="">
+										<select name="who" id="who" class="form-control">
+											<option class="form-control form-check-input" value="">전체사용자</option>
+											<option class="form-control form-check-input" value="j1">미용실</option>
+											<option class="form-control form-check-input" value="j2">일반회원</option>
+											<option class="form-control form-check-input" value="j3">디자이너</option>
+										</select>
 
 
+									</div></td>
+								<td>카테고리</td>
+								<td><div class="">
+										<select class="form-control " name="category" id="category">
+											<option class="form-control form-check-input" value="">전체카테고리</option>
+											<option class="form-control form-check-input" value="a1">입점문의</option>
+											<option class="form-control form-check-input" value="a2">단순문의</option>
+											<option class="form-control form-check-input" value="a3">불만문의</option>
+										</select>
+									</div></td>
+							</tr>
 
+							<tr>
+								<td>답변상태</td>
+								<td><div class="">
+										<select class="form-control " name="answerstatus"
+											id="answerstatus">
+											<option class="form-control form-check-input" value="">전체</option>
+											<option class="form-control form-check-input" value="1">답변완료</option>
+											<option class="form-control form-check-input" value="0">미답변</option>
+										</select>
+									</div></td>
+								<td>답변글 제외</td>
+								<td><input type="checkbox" id="exclude" name="excludeAns"
+									value="exclude" class="form-control "></td>
+							</tr>
+							<tr>
+								<td><label>게시글 찾기</label></td>
+								<td colspan="4">
+									<div class="input-group">
 
+										<div class="col">
 
-				<div class="row">
+											<select name="searchType" id="searchType"
+												class="form-control ">
+												<option value="title">제목</option>
+												<option value="contents">내용</option>
+											</select>
+										</div>
+										<div class="col">
+											<input type="text" id="searchVal" name="searchVal"
+												class="form-control ">
+										</div> <div class="btn-list justify-content-end">
 
-					<div class="col-2">
-						<label>사용자 </label>
-					</div>
-					<div class="col">
-						<select name="who" id="who" class="form-control">
-							<option class="form-control form-check-input" value="">전체사용자</option>
-							<option class="form-control form-check-input" value="j1">미용실</option>
-							<option class="form-control form-check-input" value="j2">일반회원</option>
-							<option class="form-control form-check-input" value="j3">디자이너</option>
-						</select>
+							<button type="submit" value="Submit" id="submit"
+								class="btn btn-white btn-secondary btn-lg">검색</button>
+						</div> 
+										<div class="col-3">
+											<a href="#" class="btn btn-white btn-icon"
+												aria-label="Button"> <svg
+													xmlns="http://www.w3.org/2000/svg" class="icon" width="24"
+													height="24" viewBox="0 0 24 24" stroke-width="2"
+													stroke="currentColor" fill="none" stroke-linecap="round"
+													stroke-linejoin="round">
+									<path stroke="none" d="M0 0h24v24H0z"></path>
+									<circle cx="10" cy="10" r="7"></circle>
+									<line x1="21" y1="21" x2="15" y2="15"></line></svg>
+											</a>
+										</div>
 
+									</div>
 
-					</div>
-					<div class="col-2">
-						<label>카테고리</label>
-					</div>
-					<div class="col">
-						<select class="form-control " name="category" id="category">
-							<option class="form-control form-check-input" value="">전체카테고리</option>
-							<option class="form-control form-check-input" value="a1">입점문의</option>
-							<option class="form-control form-check-input" value="a2">단순문의</option>
-							<option class="form-control form-check-input" value="a3">불만문의</option>
-						</select>
-					</div>
-					<div class="col">
-						<label for="name">답변글 제외 </label>
-					</div>
-					<div class="col-1">
-						<input type="checkbox" id="exclude" name="excludeAns"
-							value="exclude" class="form-control ">
-					</div>
+								</td>
+							</tr>
+						</table>
+					</form>
+					
 				</div>
-
-
-				<div class="row">
-
-					<div class="col">
-						<label for="name">답변상태 </label>
-					</div>
-					<div class="col">
-						<select class="form-control " name="answerstatus"
-							id="answerstatus">
-							<option class="form-control form-check-input" value="">전체</option>
-							<option class="form-control form-check-input" value="1">답변완료</option>
-							<option class="form-control form-check-input" value="0">미답변</option>
-
-						</select>
-					</div>
-				</div>
-
-
-				<div class="row">
-					<div class="col-2">
-						<label>게시글 찾기</label>
-					</div>
-					<div class="input-group-prepend">
-						<select name="searchType" id="searchType" class="form-control ">
-							<option value="title">제목</option>
-							<option value="contents">내용</option>
-							<!-- <option value="writer">작성자</option> -->
-
-						</select> <input type="text" id="searchVal" name="searchVal"
-							class="form-control ">
-
-					</div>
-				</div>
-
-
-
-
-
-
-
-
-				<div class="row">
-
-					<button type="submit" value="Submit" id="submit"
-						class="btn btn-default col-3" style="border: 1px solid gray;">검색</button>
-				</div>
-
-
-
 			</div>
-
-		</form>
-
-
-
-		<h5 class="heading">result</h5>
-		<div class="form-group" id="">
-			<form action="${pageContext.request.contextPath}/admin/qnaDelete.do">
-
-				
+		</div>
+		<div class="col">
+			<div class="card">
+				<div class="card-header">
+					<h3 class="card-title">QnA 게시글 목록</h3>
+				</div>
 				<!-- <div class="form-group" id="result"> -->
 				<div class="table-responsive" id="result">
-					<table class="table table-bordered" id="dataTabl" width="100%"
-						cellspacing="0">
+					<form
+						action="${pageContext.request.contextPath}/admin/qnaDelete.do">
+						<table
+							class="table table-bordered table-sm text-center  table card-table table-vcenter text-nowrap datatable"
+							id="dataTabl" width="100%" cellspacing="0">
 
-						<thead>
-							<tr>
-								<th><input type="checkbox" name="all" id="all" class="chk"></th>
-								<th>page
-								<th>번호</th>
-								<th>분류</th>
-								<th>제목</th>
-								<th>답변상태</th>
-								<th>답변하기</th>
-								<!-- <th>작성자</th> -->
-								<th>작성일</th>
-								<th>조회수</th>
-							</tr>
-						</thead>
-						<tbody id="tbody">
-							<c:forEach items="${list }" var="l">
+							<thead>
 								<tr>
+									<th><input type="checkbox" name="all" id="all" class="chk"></th>
+									<th>page
+									<th>번호</th>
+									<th>분류</th>
+									<th>제목</th>
+									<th>답변상태</th>
+									<th>답변하기</th>
+									<!-- <th>작성자</th> -->
+									<th>작성일</th>
+									<th>조회수</th>
+								</tr>
+							</thead>
+							<tbody id="tbody">
+								<c:forEach items="${list }" var="l">
+									<tr>
 
-									<td><input type="checkbox" class="chk" name="qna_no"
-										value="${l.qna_no }"></td>
-									<td>${ l.qna_whov}</td>
-									<td>${ l.qna_no}</td>
-									<td>${ l.qna_categoryv}</td>
-									<td><c:if test="${l.qna_level > 0}">
-											<c:forEach begin="1" end="${l.qna_level}">
+										<td><input type="checkbox" class="chk" name="qna_no"
+											value="${l.qna_no }"></td>
+										<td>${ l.qna_whov}</td>
+										<td>${ l.qna_no}</td>
+										<td>${ l.qna_categoryv}</td>
+										<td><c:if test="${l.qna_level > 0}">
+												<c:forEach begin="1" end="${l.qna_level}">
 			&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;	<!-- 답변글일경우 글 제목 앞에 공백을 준다. -->
-											</c:forEach>
+												</c:forEach>
 	&nbsp;&nbsp;&nbsp;&nbsp;RE :
 	</c:if> <a
-										href="${pageContext.request.contextPath}/admin/qnaView.do?qna_no=${ l.qna_no}">${ l.qna_title}</a></td>
+											href="${pageContext.request.contextPath}/admin/qnaView.do?qna_no=${ l.qna_no}">${ l.qna_title}</a></td>
 
-									<td><c:choose>
-											<c:when test="${l.answerstatus >1}">답변완료</c:when>
-											<c:when test="${l.answerstatus==1 }">미답변</c:when>
-										</c:choose></td>
-									<td><c:if test="${l.qna_category !='m5' }">
-											<button	class="btn btn-default " style="border: 1px solid gray;"
-											type="button"	onclick="location.href = 'qnaView.do?qna_no=${ l.qna_no}'">답변하기
-											</button>
-										</c:if></td>
+										<td><c:choose>
+												<c:when test="${l.answerstatus >1}">답변완료</c:when>
+												<c:when test="${l.answerstatus==1 }">미답변</c:when>
+											</c:choose></td>
+										<td><c:if test="${l.qna_category !='m5' }">
+												<button class="btn btn-default "
+													style="border: 1px solid gray;" type="button"
+													onclick="location.href = 'qnaView.do?qna_no=${ l.qna_no}'">답변하기
+												</button>
+											</c:if></td>
 
-									<%-- 
+										<%-- 
 										<a
 										href="${pageContext.request.contextPath}/admin/qnaView.do?qna_no=${ l.qna_no}"></a> --%>
-									<%-- <td>${ l.qna_answer}</td> --%>
-									<td>${ l.qna_writedate}</td>
-									<td>${ l.qna_hits}</td>
+										<%-- <td>${ l.qna_answer}</td> --%>
+										<td>${ l.qna_writedate}</td>
+										<td>${ l.qna_hits}</td>
 
-								</tr>
-							</c:forEach>
-						</tbody>
-					</table>
-					<button type="submit" value="0" id="delete" class="btn btn-default " style="border: 1px solid gray;">삭제</button>
-					<button id="excel" class="btn btn-default " style="border: 1px solid gray;">excel</button>
+									</tr>
+								</c:forEach>
+							</tbody>
+						</table>
+						<button type="submit" value="0" id="delete"
+							class="btn btn-default " style="border: 1px solid gray;">삭제</button>
+						<button id="excel" class="btn btn-default "
+							style="border: 1px solid gray;">excel</button>
 				</div>
-			</form>
+				</form>
+			</div>
 		</div>
-	</div>
-	<!-- <button type="button" id="excel">excel</button> -->
-	<script
+		<!-- <button type="button" id="excel">excel</button> -->
+		<%-- 	<script
 		src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.bundle.min.js"
 		crossorigin="anonymous"></script>
 	<script
@@ -409,6 +499,7 @@
 		src="https://cdn.datatables.net/1.10.20/js/dataTables.bootstrap4.min.js"
 		crossorigin="anonymous"></script>
 	<script
-		src="${pageContext.request.contextPath}/decorator/ges/dist/assets/demo/datatables-demo.js"></script>
+		src="${pageContext.request.contextPath}/decorator/ges/dist/assets/demo/datatables-demo.js"></script> --%>
+	</div>
 </body>
 </html>

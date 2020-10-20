@@ -31,11 +31,43 @@
 <script
 	src="${pageContext.request.contextPath}/decorator/ges/dist/assets/demo/datatables-demo.js"></script>
 
-
-
-
+<link rel="stylesheet"
+	href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+<link rel="stylesheet"
+	href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,300i,400,400i,500,500i,600,600i,700,700i&amp;subset=latin-ext">
 <script type="text/javascript"
 	src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.24.0/moment.min.js"></script>
+<%-- <script
+	src="${pageContext.request.contextPath}/decorator/tabler-gh-pages/assets/js/require.min.js"></script>
+--%>
+<script>
+	requirejs
+			.config({
+				baseUrl : "${pageContext.request.contextPath}/decorator/tabler-gh-pages"
+			});
+</script>
+<!-- Dashboard Core -->
+<link
+	href="${pageContext.request.contextPath}/decorator/tabler-gh-pages/assets/css/dashboard.css"
+	rel="stylesheet" />
+<script
+	src="${pageContext.request.contextPath}/decorator/tabler-gh-pages/assets/js/dashboard.js"></script>
+<!-- c3.js Charts Plugin -->
+<link
+	href="${pageContext.request.contextPath}/decorator/tabler-gh-pages/assets/plugins/charts-c3/plugin.css"
+	rel="stylesheet" />
+<script
+	src="${pageContext.request.contextPath}/decorator/tabler-gh-pages/assets/plugins/charts-c3/plugin.js"></script>
+<!-- Google Maps Plugin -->
+<link
+	href="${pageContext.request.contextPath}/decorator/tabler-gh-pages/assets/plugins/maps-google/plugin.css"
+	rel="stylesheet" />
+<script
+	src="${pageContext.request.contextPath}/decorator/tabler-gh-pages/assets/plugins/maps-google/plugin.js"></script>
+<!-- Input Mask Plugin -->
+<script
+	src="${pageContext.request.contextPath}/decorator/tabler-gh-pages/assets/plugins/input-mask/plugin.js"></script>
+
 
 <script type="text/javascript">
 	$(function() {
