@@ -38,9 +38,9 @@
 
 		insert into
 		tt_middle_category(
-		tmac_no, tmic_explication,
+		tmac_no,tmic_name, tmic_explication,
 		tmic_status)
-		values(#{tmac_no},#{tmic_explication},1)
+		values(#{tmac_no},#{tmic_name},#{tmic_explication},1)
 	</insert>
 	<update id="tmicUpdate">
 		update tt_middle_category
@@ -50,6 +50,7 @@
 				tmac_name=#{tmac_name}) ,
 			</if>
 			<if test="tmic_explication != null">tmic_explication= #{tmic_explication},</if>
+			<if test="tmic_name != null">tmic_name= #{tmic_name},</if>
 			<if test="tmic_status != null">tmic_status= #{tmic_status},</if>
 		</trim>
 

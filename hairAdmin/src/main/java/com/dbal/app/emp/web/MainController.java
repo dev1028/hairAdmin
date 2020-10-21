@@ -8,7 +8,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.dbal.app.emp.EmpVo;
-import com.dbal.app.emp.QnaVo;
+import com.dbal.app.emp.service.CustomerService;
 import com.dbal.app.emp.service.MainService;
 
 @Controller
@@ -16,18 +16,18 @@ public class MainController {
 
 	@Autowired
 	MainService mainService;
+	@Autowired
+	CustomerService customerService;
 
 //	@RequestMapping(value = "/loginProcess")
 	@RequestMapping("/admin/adminLogin.do")
 	public String loginProcess(HttpSession session, EmpVo vo) {
 		EmpVo resultVo = mainService.getLoginInfo(vo);
-		
-		
-		
+
 		if (resultVo == null) { // 아이디없음
 			session.setAttribute("errormsg", "noid");
 			return "coupon/adminLogin";
-		
+
 		} else {
 			if (vo.getEmp_password().equals(resultVo.getEmp_password())) {
 				session.setAttribute("loginCheck", true);
@@ -36,21 +36,18 @@ public class MainController {
 				session.setAttribute("empname", resultVo.getEmp_name());
 				session.setAttribute("empemail", resultVo.getEmp_email());
 				return "redirect:adminMain.do";
-				
+
 			} else { // 패스워드 불일치
 				session.setAttribute("errormsg", "nopw");
 				return "coupon/adminLogin";
 			}
 		}
-		
-		
-	
+
 	}
+
 	@RequestMapping("/admin/adminMain.do")
 	public String main(Model model, HttpSession session) {
-	
-
-		System.out.println("??dfdfdfd----------------");
+		model.addAttribute("list", customerService.getNewHairshopList(null));
 		return "coupon/adminMain";
 	}
 
@@ -73,7 +70,5 @@ public class MainController {
 			return "login";
 		}
 	}
-
-	
 
 }

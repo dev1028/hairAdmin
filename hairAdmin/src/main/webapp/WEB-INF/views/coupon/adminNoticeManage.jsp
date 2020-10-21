@@ -9,8 +9,10 @@
 <meta charset="UTF-8">
 <title>Insert title here</title>
 
+
 <script type="text/javascript">
 	$(function() {
+
 		$('#table').dataTable({
 
 			"paging" : true, //페이징처리
@@ -61,6 +63,7 @@
 			}, {
 				"width" : "1em",
 				"targets" : 6,
+
 				"orderable" : true
 			} ]
 		});
@@ -160,7 +163,9 @@
 		<div class="col">
 			<div class="card">
 				<div class="card-header">
+
 					<h5 class="card-title">게시글 조회</h5>
+
 				</div>
 
 				<div class="table-responsive" id="result">
@@ -212,11 +217,6 @@
 												class="form-control">
 
 										</div>
-
-
-
-
-
 									</div>
 
 								</td>
@@ -231,12 +231,9 @@
 											<option class="form-control form-check-input" value="j2">일반회원</option>
 											<option class="form-control form-check-input" value="j3">디자이너</option>
 										</select>
-
-
 									</div></td>
 
 							</tr>
-
 
 							<tr>
 								<td><label>게시글 찾기</label></td>
@@ -257,27 +254,26 @@
 											<input type="text" id="searchVal" name="searchInput"
 												class="form-control ">
 										</div>
+
 										<div>
 											<button type="submit" class="btn btn-secondary">검색</button>
 										</div>
-
 									</div>
-
 								</td>
 							</tr>
-
-
-
-
-
 						</table>
 
+
+						<div class="btn-list justify-content-end">
+
+							<button type="submit" value="Submit" id="submit"
+								class="btn btn-white btn-secondary btn-lg">검색</button>
+						</div>
 
 					</form>
 				</div>
 			</div>
 		</div>
-
 		<div class="col">
 			<div class="card">
 				<form
@@ -327,5 +323,9 @@
 			</div>
 		</div>
 	</div>
+
+
+
+
 </body>
 </html>

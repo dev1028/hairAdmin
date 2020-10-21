@@ -8,73 +8,13 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
-<link
-	href="${pageContext.request.contextPath}/decorator/ges/dist/css/styles.css"
-	rel="stylesheet" />
-<link
-	href="${pageContext.request.contextPath}/decorator/ges/dist/css/styles.css"
-	rel="stylesheet" />
-<link
-	href="https://cdn.datatables.net/1.10.20/css/dataTables.bootstrap4.min.css"
-	rel="stylesheet" crossorigin="anonymous" />
-<script
-	src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.13.0/js/all.min.js"
-	crossorigin="anonymous"></script>
-<script
-	src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.bundle.min.js"
-	crossorigin="anonymous"></script>
-<script
-	src="${pageContext.request.contextPath}/decorator/ges/dist/js/scripts.js"></script>
-<script
-	src="https://cdn.datatables.net/1.10.20/js/jquery.dataTables.min.js"
-	crossorigin="anonymous"></script>
-<script
-	src="https://cdn.datatables.net/1.10.20/js/dataTables.bootstrap4.min.js"
-	crossorigin="anonymous"></script>
-<script
-	src="${pageContext.request.contextPath}/decorator/ges/dist/assets/demo/datatables-demo.js"></script>
-
-<link rel="stylesheet"
-	href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
-<link rel="stylesheet"
-	href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,300i,400,400i,500,500i,600,600i,700,700i&amp;subset=latin-ext">
-<script type="text/javascript"
-	src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.24.0/moment.min.js"></script>
-<%-- <script
-	src="${pageContext.request.contextPath}/decorator/tabler-gh-pages/assets/js/require.min.js"></script>
---%>
-<!-- <script>
-	requirejs.config({
-				baseUrl : "${pageContext.request.contextPath}/decorator/tabler-gh-pages"
-			});
-</script> -->
-<!-- Dashboard Core -->
-<link
-	href="${pageContext.request.contextPath}/decorator/tabler-gh-pages/assets/css/dashboard.css"
-	rel="stylesheet" />
-<script
-	src="${pageContext.request.contextPath}/decorator/tabler-gh-pages/assets/js/dashboard.js"></script>
-<!-- c3.js Charts Plugin -->
-<link
-	href="${pageContext.request.contextPath}/decorator/tabler-gh-pages/assets/plugins/charts-c3/plugin.css"
-	rel="stylesheet" />
-<script
-	src="${pageContext.request.contextPath}/decorator/tabler-gh-pages/assets/plugins/charts-c3/plugin.js"></script>
-<!-- Google Maps Plugin -->
-<link
-	href="${pageContext.request.contextPath}/decorator/tabler-gh-pages/assets/plugins/maps-google/plugin.css"
-	rel="stylesheet" />
-<script
-	src="${pageContext.request.contextPath}/decorator/tabler-gh-pages/assets/plugins/maps-google/plugin.js"></script>
-<!-- Input Mask Plugin -->
-<script
-	src="${pageContext.request.contextPath}/decorator/tabler-gh-pages/assets/plugins/input-mask/plugin.js"></script>
-
 
 
 <script type="text/javascript">
 	$(function() {
+
 		$('#table').dataTable({
+
 			fixedColumns : {
 				leftColumns : 10,
 				heightMatch : 'none'
@@ -280,9 +220,7 @@
 	});
 </script>
 
-<script
-	src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.13.0/js/all.min.js"
-	crossorigin="anonymous"></script>
+
 </head>
 <body>
 	<br>
@@ -397,10 +335,12 @@
 											<input type="text" id="searchVal" name="searchInput"
 												class="form-control ">
 										</div>
-										<div class="btn-list justify-content-end">
+
+										<div class="btn-list justify-content-end col-3">
 
 											<button type="submit" value="Submit" id="submit"
-												class="btn btn-white btn-secondary btn-lg">검색</button>
+												class="btn btn-white btn-secondary btn-lg ">검색</button>
+
 										</div>
 
 
@@ -416,8 +356,14 @@
 		</div>
 		<div class="col">
 			<div class="card">
-				<div class="card-header">
+				<div class="card-header d-flex">
 					<h3 class="card-title">QnA 게시글 목록</h3>
+					<!-- <div class="btn-list justify-content-end text-right d-flex">
+						<button type="submit" value="0" id="delete"
+							class="btn btn-default btn btn-primary ml-auto" style="border: 1px solid gray;">삭제</button>
+						<button id="excel" class="btn btn-default "
+							style="border: 1px solid gray;">excel</button>
+					</div> -->
 				</div>
 				<div class="table-responsive" id="result">
 					<form
