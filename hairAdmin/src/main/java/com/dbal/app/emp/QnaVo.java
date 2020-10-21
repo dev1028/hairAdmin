@@ -22,7 +22,7 @@ public class QnaVo {
 	public String qna_writer; // 작성자(login id)
 	String emp_name;
 	String emp_alias;
-	
+	String mem_name;
 	public String first;
 	public String last;
 	public String qna_whov;

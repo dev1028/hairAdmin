@@ -14,11 +14,15 @@
 	<select id="getCouponList" resultType="coupon">
 		SELECT
 
-		c.*,
+		c.HSC_NO,c.HS_NO,to_char(c.HSC_ISSUEDATE,'yy-mm-dd')as
+		HSC_ISSUEDATE,to_char(c.HSC_EXPIREDATE,'yy-mm-dd')as
+		HSC_EXPIREDATE,c.HSC_COUPON_QUANTITY,c.HSC_DISCOUNT_RATE,c.HSC_MAXDISCOUNT_PAY,c.HSC_NAME,
+
 		h.*
 		FROM
 		hs_coupon c
-		JOIN hairshop h ON ( h.hs_no = c.hs_no )
+		JOIN hairshop h ON ( h.hs_no
+		= c.hs_no )
 
 
 

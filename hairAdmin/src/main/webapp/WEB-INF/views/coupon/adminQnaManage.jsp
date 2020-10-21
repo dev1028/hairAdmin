@@ -8,82 +8,33 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
-<link
-	href="${pageContext.request.contextPath}/decorator/ges/dist/css/styles.css"
-	rel="stylesheet" />
-<link
-	href="${pageContext.request.contextPath}/decorator/ges/dist/css/styles.css"
-	rel="stylesheet" />
-<link
-	href="https://cdn.datatables.net/1.10.20/css/dataTables.bootstrap4.min.css"
-	rel="stylesheet" crossorigin="anonymous" />
-<script
-	src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.13.0/js/all.min.js"
-	crossorigin="anonymous"></script>
-<script
-	src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.bundle.min.js"
-	crossorigin="anonymous"></script>
-<script
-	src="${pageContext.request.contextPath}/decorator/ges/dist/js/scripts.js"></script>
-<script
-	src="https://cdn.datatables.net/1.10.20/js/jquery.dataTables.min.js"
-	crossorigin="anonymous"></script>
-<script
-	src="https://cdn.datatables.net/1.10.20/js/dataTables.bootstrap4.min.js"
-	crossorigin="anonymous"></script>
-<script
-	src="${pageContext.request.contextPath}/decorator/ges/dist/assets/demo/datatables-demo.js"></script>
-
-<link rel="stylesheet"
-	href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
-<link rel="stylesheet"
-	href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,300i,400,400i,500,500i,600,600i,700,700i&amp;subset=latin-ext">
-<script type="text/javascript"
-	src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.24.0/moment.min.js"></script>
-<%-- <script
-	src="${pageContext.request.contextPath}/decorator/tabler-gh-pages/assets/js/require.min.js"></script>
---%>
-<script>
-	requirejs
-			.config({
-				baseUrl : "${pageContext.request.contextPath}/decorator/tabler-gh-pages"
-			});
-</script>
-<!-- Dashboard Core -->
-<link
-	href="${pageContext.request.contextPath}/decorator/tabler-gh-pages/assets/css/dashboard.css"
-	rel="stylesheet" />
-<script
-	src="${pageContext.request.contextPath}/decorator/tabler-gh-pages/assets/js/dashboard.js"></script>
-<!-- c3.js Charts Plugin -->
-<link
-	href="${pageContext.request.contextPath}/decorator/tabler-gh-pages/assets/plugins/charts-c3/plugin.css"
-	rel="stylesheet" />
-<script
-	src="${pageContext.request.contextPath}/decorator/tabler-gh-pages/assets/plugins/charts-c3/plugin.js"></script>
-<!-- Google Maps Plugin -->
-<link
-	href="${pageContext.request.contextPath}/decorator/tabler-gh-pages/assets/plugins/maps-google/plugin.css"
-	rel="stylesheet" />
-<script
-	src="${pageContext.request.contextPath}/decorator/tabler-gh-pages/assets/plugins/maps-google/plugin.js"></script>
-<!-- Input Mask Plugin -->
-<script
-	src="${pageContext.request.contextPath}/decorator/tabler-gh-pages/assets/plugins/input-mask/plugin.js"></script>
-
 
 
 <script type="text/javascript">
 	$(function() {
-		$('#dataTabl').dataTable({
-			language : {
-				"emptyTable" : "일치하는 데이터가 없습니다",
+
+		$('#table').dataTable({
+
+			fixedColumns : {
+				leftColumns : 10,
+				heightMatch : 'none'
+			},
+			"paging" : true, //페이징처리
+			"ordering" : true, //칼럼별 정렬기능
+			"autoWidth" : true, //가로자동
+			"lengthChange" : false, //데이터건수 변경
+			"pageLength" : 10, //기본 데이터건수
+			//"lengthMenu": [[50, 100, 1000], [50, 100, "Max(1000)"]], //데이터건수옵션
+			// "order": [2,'desc'], //기본 정렬칼럼
+			"searching" : false, //검색
+			"language" : {
+				"emptyTable" : "일치하는 데이터가 없습니다. ",
 				"lengthMenu" : "페이지당 _MENU_ 개씩 보기",
-				"info" : "현재 _START_ - _END_ / _TOTAL_건",
+				"info" : " _START_ - _END_ / _TOTAL_건",
 				"infoEmpty" : "데이터 없음",
 				"infoFiltered" : "( _MAX_건의 데이터에서 필터링됨 )",
 				"search" : "에서 검색: ",
-				"zeroRecords" : "일치하는 데이터가 없습니다",
+				"zeroRecords" : "일치하는 데이터가 없습니다. ",
 				"loadingRecords" : "로딩중...",
 				"processing" : "잠시만 기다려 주세요...",
 				"paginate" : {
@@ -91,21 +42,7 @@
 					"previous" : "이전"
 				}
 			},
-			fixedColumns : {
-				leftColumns : 10,
-				heightMatch : 'none'
-			},
-			"paging" : true, //페이징처리
-			"ordering" : true, //칼럼별 정렬기능
-			//"autoWidth": false, //가로자동
-			"lengthChange" : false, //데이터건수 변경
-			"pageLength" : 25, //기본 데이터건수
-			//"lengthMenu": [[50, 100, 1000], [50, 100, "Max(1000)"]], //데이터건수옵션
-			// "order": [2,'desc'], //기본 정렬칼럼
-			"searching" : false, //검색
-			"columnDefs" : [//칼럼조작
-			//가로길이         //칼럼제목   //데이터타겟    //해당칼럼만 정렬기능사용안함
-			{
+			"columnDefs" : [ {
 				"width" : "1em",
 				"targets" : 0,
 				"orderable" : false
@@ -283,9 +220,7 @@
 	});
 </script>
 
-<script
-	src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.13.0/js/all.min.js"
-	crossorigin="anonymous"></script>
+
 </head>
 <body>
 	<br>
@@ -397,13 +332,15 @@
 											</select>
 										</div>
 										<div class="col">
-											<input type="text" id="searchVal" name="searchVal"
+											<input type="text" id="searchVal" name="searchInput"
 												class="form-control ">
 										</div>
+
 										<div class="btn-list justify-content-end col-3">
 
 											<button type="submit" value="Submit" id="submit"
 												class="btn btn-white btn-secondary btn-lg ">검색</button>
+
 										</div>
 
 
@@ -428,13 +365,12 @@
 							style="border: 1px solid gray;">excel</button>
 					</div> -->
 				</div>
-				<!-- <div class="form-group" id="result"> -->
 				<div class="table-responsive" id="result">
 					<form
 						action="${pageContext.request.contextPath}/admin/qnaDelete.do">
 						<table
 							class="table table-bordered table-sm text-center  table card-table table-vcenter text-nowrap datatable"
-							id="dataTabl" width="100%" cellspacing="0">
+							id="table" width="100%" cellspacing="0">
 
 							<thead>
 								<tr>
@@ -470,18 +406,19 @@
 										<td><c:choose>
 												<c:when test="${l.answerstatus >1}">답변완료</c:when>
 												<c:when test="${l.answerstatus==1 }">미답변</c:when>
+												<c:when test="${l.answerstatus==0 }">-</c:when>
 											</c:choose></td>
-										<td><c:if test="${l.qna_category !='m5' }">
-												<button class="btn btn-default "
-													style="border: 1px solid gray;" type="button"
-													onclick="location.href = 'qnaView.do?qna_no=${ l.qna_no}'">답변하기
-												</button>
-											</c:if></td>
-
-										<%-- 
-										<a
-										href="${pageContext.request.contextPath}/admin/qnaView.do?qna_no=${ l.qna_no}"></a> --%>
-										<%-- <td>${ l.qna_answer}</td> --%>
+										<td>
+											<button class="btn btn-default "
+												style="border: 1px solid gray;" type="button"
+												onclick="location.href = 'qnaView.do?qna_no=${ l.qna_no}'">
+												<c:choose>
+													<c:when test="${l.qna_category !='m5' }">답변하기</c:when>
+													<c:otherwise>수정하기
+													</c:otherwise>
+												</c:choose>
+											</button>
+										</td>
 										<td>${ l.qna_writedate}</td>
 										<td>${ l.qna_hits}</td>
 
@@ -497,20 +434,6 @@
 				</div>
 			</div>
 		</div>
-		<!-- <button type="button" id="excel">excel</button> -->
-		<%-- 	<script
-		src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.bundle.min.js"
-		crossorigin="anonymous"></script>
-	<script
-		src="${pageContext.request.contextPath}/decorator/ges/dist/js/scripts.js"></script>
-	<script
-		src="https://cdn.datatables.net/1.10.20/js/jquery.dataTables.min.js"
-		crossorigin="anonymous"></script>
-	<script
-		src="https://cdn.datatables.net/1.10.20/js/dataTables.bootstrap4.min.js"
-		crossorigin="anonymous"></script>
-	<script
-		src="${pageContext.request.contextPath}/decorator/ges/dist/assets/demo/datatables-demo.js"></script> --%>
 	</div>
 </body>
 </html>

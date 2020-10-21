@@ -124,7 +124,7 @@
 									<td>${l.hsc_status }</td>
 									<!--  <td></td> -->
 									<td>${ l.hsc_name}</td>
-									<td>${ l.hsc_discount_rate}</td>
+									<td>${ l.hsc_discount_rate}%</td>
 									<td>${l.hsc_issuedate}~${ l.hsc_expiredate}</td>
 									<td>${ l.hsc_coupon_quantity}</td>
 

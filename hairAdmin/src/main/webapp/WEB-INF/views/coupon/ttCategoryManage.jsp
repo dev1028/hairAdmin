@@ -86,7 +86,58 @@
 	$(document)
 			.ready(
 					function() {
-
+						$('#table').dataTable({
+							"scrollY" : "500px",
+							fixedColumns : {
+								leftColumns : 10,
+								heightMatch : 'none'
+							},
+							"paging" : false, //페이징처리
+							"ordering" : true, //칼럼별 정렬기능
+							"autoWidth" : true, //가로자동
+							"lengthChange" : false, //데이터건수 변경
+							"pageLength" : 25, //기본 데이터건수
+							//"lengthMenu": [[50, 100, 1000], [50, 100, "Max(1000)"]], //데이터건수옵션
+							"order" : [ 0, 'desc' ], //기본 정렬칼럼
+							"searching" : false, //검색
+							"language": {
+						        "emptyTable": "일치하는 데이터가 없습니다. ",
+						        "lengthMenu": "페이지당 _MENU_ 개씩 보기",
+						        "info": " _START_ - _END_ / _TOTAL_건",
+						        "infoEmpty": "데이터 없음",
+						        "infoFiltered": "( _MAX_건의 데이터에서 필터링됨 )",
+						        "search": "에서 검색: ",
+						        "zeroRecords": "일치하는 데이터가 없습니다. ",
+						        "loadingRecords": "로딩중...",
+						        "processing":     "잠시만 기다려 주세요...",
+						        "paginate": {
+						            "next": "다음",
+						            "previous": "이전"
+						        }
+						    },
+							"columnDefs" : [
+						
+							{
+								"width" : "1em",
+								"targets" : 0,
+								"orderable" : true
+							}, {
+								"width" : "1em",
+								"targets" : 1,
+								"orderable" : true
+							}, {
+								"width" : "1em",
+								"targets" : 2
+							}, {
+								"width" : "1em",
+								"targets" : 3,
+								"orderable" : true
+							}, {
+								"width" : ".5em",
+								"targets" : 4,
+								"orderable" : false
+							} ]
+						});
 						$("#approval")
 								.on(
 										"click",
@@ -101,10 +152,10 @@
 
 											$
 													.ajax({
-														url : "${pageContext.request.contextPath}/ajax/admin/tmicUpdate.do",
+														url : "${pageContext.request.contextPath}/admin/tmicUpdate.do",
 														data : {
 															tmic_no : finUpdate1,
-															tmic_approval : "1"
+															tmic_status : "1"
 
 														},
 														type : "post",
@@ -144,7 +195,7 @@
 										function() {
 											$
 													.ajax(
-															"${pageContext.request.contextPath}/ajax/admin/tmicInsert.do",
+															"${pageContext.request.contextPath}/admin/tmicInsert.do",
 															{
 																data : $(
 																		"#tmic_insert_frm")
@@ -207,7 +258,7 @@
 											var $tr = $(this).closest("tr");
 											$
 													.ajax({
-														url : "${pageContext.request.contextPath}/ajax/admin/tmicDelete.do", // 클라이언트가 요청을 보낼 서버의 URL 주소
+														url : "${pageContext.request.contextPath}/admin/tmicDelete.do", // 클라이언트가 요청을 보낼 서버의 URL 주소
 														data : {
 															tmic_no : $(this)
 																	.closest(
@@ -397,7 +448,7 @@
 
 												$
 														.ajax({
-															url : "${pageContext.request.contextPath}/ajax/admin/tmicUpdate.do",
+															url : "${pageContext.request.contextPath}/admin/tmicUpdate.do",
 															data : {
 																tmic_no : finUpdate1,
 																tmac_name : finUpdate2,
@@ -505,7 +556,7 @@
 					</c:forEach>
 
 				</select> <label>중분류 설명</label> <input type="text" name="tmic_explication">
-				<button id="tmic_insert">등록</button>
+				<button id="tmic_insert" class=" btn btn-outline-primary ">등록</button>
 			</div>
 		</form>
 		<div class="table-box-wrap">
@@ -514,10 +565,10 @@
 
 
 
-			<div id="codelisttable" class="dataTables_scrollHeadInner">
+			<div class="dataTables_scrollHeadInner">
 				<table
 					class="table table-bordered table-hover table-sm text-center TABLE table-bordered"
-					id="dataTable1" width="100%" cellspacing="0">
+					id="table" width="100%" cellspacing="0">
 					<thead class="thead-dark">
 						<tr>
 							<th scope="row">중분류번호</th>
@@ -538,11 +589,12 @@
 								<td><c:choose>
 										<c:when test="${a.tmic_status ==1}">승인완료</c:when>
 										<c:when test="${a.tmic_status ==0 }">미승인<button
-												id="approval">승인</button></c:when>
-											<c:when test="${a.tmic_status ==2 }">보류</c:when>
-											<c:when test="${a.tmic_status ==3 }">거절</c:when>
-											
-										
+												id="approval">승인</button>
+										</c:when>
+										<c:when test="${a.tmic_status ==2 }">보류</c:when>
+										<c:when test="${a.tmic_status ==3 }">거절</c:when>
+
+
 									</c:choose></td>
 								<td><div class="btn-group btn-group-sm" role="group"
 										aria-label="Basic example">
