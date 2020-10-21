@@ -8,61 +8,74 @@
 <title>Insert title here</title>
 <script type="text/javascript">
 	$(document).ready(function() {
+		$("#delete").on("click", function() {
+			var $finTr = $(this).closest("tr").children();
+			console.log($finTr);
+			console.log($(this));
+			var finUpdate1 = $finTr.eq(0).text();
+			console.log(finUpdate1);
 
- 		$("#approval").on("click", function(){
- 			var $finTr = $(this).closest("tr").children();
- 			console.log($finTr);
- 			console.log($(this));
- 			var finUpdate1 = $finTr.eq(0).text();
- 			console.log(finUpdate1);
- 			
+			$.ajax({
+				url : "${pageContext.request.contextPath}/admin/tmicDelete.do",
+				data : {
+					tmic_no : finUpdate1,
 
- 			$.ajax({
- 				url : "${pageContext.request.contextPath}/ajax/admin/tmicUpdate.do",
- 				data : {
- 							tmic_no : finUpdate1,
- 							tmic_status : 1
- 						},
- 						type : "post",
- 						dataType : "json",
- 					});
- 		})
- 		$("#reject").on("click", function(){
- 			var $finTr = $(this).closest("tr").children();
- 			console.log($finTr);
- 			console.log($(this));
- 			var finUpdate1 = $finTr.eq(0).text();
- 			console.log(finUpdate1);
- 			
+				},
+				type : "post",
+				dataType : "json",
+			});
+		})
+		$("#approval").on("click", function() {
+			var $finTr = $(this).closest("tr").children();
+			console.log($finTr);
+			console.log($(this));
+			var finUpdate1 = $finTr.eq(0).text();
+			console.log(finUpdate1);
 
- 			$.ajax({
- 				url : "${pageContext.request.contextPath}/ajax/admin/tmicUpdate.do",
- 				data : {
- 							tmic_no : finUpdate1,
- 							tmic_status : 3
- 						},
- 						type : "post",
- 						dataType : "json",
- 					});
- 		})
- 		$("#hold").on("click", function(){
- 			var $finTr = $(this).closest("tr").children();
- 			console.log($finTr);
- 			console.log($(this));
- 			var finUpdate1 = $finTr.eq(0).text();
- 			console.log(finUpdate1);
- 			
+			$.ajax({
+				url : "${pageContext.request.contextPath}/admin/tmicUpdate.do",
+				data : {
+					tmic_no : finUpdate1,
+					tmic_status : 1
+				},
+				type : "post",
+				dataType : "json",
+			});
+		})
+		$("#reject").on("click", function() {
+			var $finTr = $(this).closest("tr").children();
+			console.log($finTr);
+			console.log($(this));
+			var finUpdate1 = $finTr.eq(0).text();
+			console.log(finUpdate1);
 
- 			$.ajax({
- 				url : "${pageContext.request.contextPath}/ajax/admin/tmicUpdate.do",
- 				data : {
- 							tmic_no : finUpdate1,
- 							tmic_status : 2
- 						},
- 						type : "post",
- 						dataType : "json",
- 					});
- 		})
+			$.ajax({
+				url : "${pageContext.request.contextPath}/admin/tmicUpdate.do",
+				data : {
+					tmic_no : finUpdate1,
+					tmic_status : 3
+				},
+				type : "post",
+				dataType : "json",
+			});
+		})
+		$("#hold").on("click", function() {
+			var $finTr = $(this).closest("tr").children();
+			console.log($finTr);
+			console.log($(this));
+			var finUpdate1 = $finTr.eq(0).text();
+			console.log(finUpdate1);
+
+			$.ajax({
+				url : "${pageContext.request.contextPath}/admin/tmicUpdate.do",
+				data : {
+					tmic_no : finUpdate1,
+					tmic_status : 2
+				},
+				type : "post",
+				dataType : "json",
+			});
+		})
 	});
 
 	function status() {
@@ -71,17 +84,16 @@
 		console.log($(this));
 		var finUpdate1 = $finTr.eq(0).text();
 		console.log(finUpdate1);
-		
 
 		$.ajax({
-			url : "${pageContext.request.contextPath}/ajax/admin/tmicUpdate.do",
+			url : "${pageContext.request.contextPath}/admin/tmicUpdate.do",
 			data : {
-						tmic_no : finUpdate1,
-						tmic_status : tmic_status
-					},
-					type : "post",
-					dataType : "json",
-				});
+				tmic_no : finUpdate1,
+				tmic_status : tmic_status
+			},
+			type : "post",
+			dataType : "json",
+		});
 	}
 </script>
 </head>
@@ -128,12 +140,12 @@
 									</c:choose></td>
 								<td><div class="btn-group btn-group-sm" role="group"
 										aria-label="Basic example">
-										<button id="approval">승인</button>
-										<button id="reject">거절</button>
+										<button class="btn btn-secondary " id="approval">승인</button>
+										<button class="btn btn-secondary " id="reject">거절</button>
 
-										<button id="hold">보류</button>
-										<button type="button" class="btn btn-secondary btncodeUpdate">수정</button>
-										<button type="button" class="btn btn-danger btncodeDelete">삭제</button>
+										<button class="btn btn-secondary " id="hold">보류</button>
+										<button type="button" class="btn btn-danger btncodeDelete"
+											id="delete">삭제</button>
 									</div></td>
 							</tr>
 						</c:forEach>

@@ -38,19 +38,12 @@
 		} else {
 			$(".none").css("display", "none");
 			$("#update").css("display", "block");
-		
 
 		}
-		
-		
-		
-		
 
-			$(".sub").on("click",function(){
-				$("#loginFrm").submit();
-			})
-	
-		
+		$(".sub").on("click", function() {
+			$("#loginFrm").submit();
+		})
 
 	})
 </script>
@@ -59,7 +52,7 @@
 <body>
 
 
-<div class="container">
+	<div class="container">
 
 
 
@@ -68,123 +61,132 @@
 
 
 
-	<div id="app">
-		<div class="container">
-			<form class="mt-4"
-				action="${pageContext.request.contextPath}/admin/qnaAnswer.do">
-				<div class="row">
-					<!-- POST FORM -->
+		<div id="app">
+			<div class="container">
+				<form class="mt-4"
+					action="${pageContext.request.contextPath}/admin/qnaAnswer.do">
+					<div class="row">
+						<!-- POST FORM -->
 
-					<div class="col-6">
-						<div class="card">
-							<div class="card-body parent">
-								<h4 class="card-title">qna 게시글 상세보기</h4>
+						<div class="col-6">
+							<div class="card">
+								<div class="card-body parent">
+									<h4 class="card-title">qna 게시글 상세보기</h4>
 
 
-								<div class="form-group ">
-									<label>페이지 </label> <select name="qna_who" id="qna_who"
-										class="form-control ">
-										<option class="form-control form-check-input"
-											value="${vo.qna_who }">${vo.qna_whov }</option>
-									</select>
-
-								</div>
-								<div class="row">
-									<div class="form-group col-6">
-										<label>글번호 </label> <input v-model="model.post.title"
-											class="form-control" name="qna_no" value="${vo.qna_no }" />
-									</div>
-									<div class="form-group col-6">
-										<label>조회수 </label> <input v-model="model.post.title"
-											class="form-control" name="qna_hits" value=" ${vo.qna_hits }">
-									</div>
-								</div>
-								<div class="row">
-									<div class="form-group col-6">
-										<label>카테고리 </label> <input v-model="model.post.title"
-											class="form-control " id="qna_category" name="qna_category"
-											value="${vo.qna_categoryv }">
-									</div>
-
-									<div class="form-group col-6">
-										<label>답변상태</label> <input v-model="model.post.friendlyUrl"
-											type="text" class="form-control" value="${vo.answerstatus }">
-									</div>
-								</div>
-
-								<div class="row">
-									<div class="form-group col-6">
-										<label>작성자 </label> <input v-model="model.post.title"
-											class="form-control" name="qna_shop_customer_no"
-											value="${vo.qna_shop_customer_no }">
+									<div class="form-group ">
+										<label>페이지 </label> <select name="qna_who" id="qna_who"
+											class="form-control ">
+											<option class="form-control form-check-input"
+												value="${vo.qna_who }">${vo.qna_whov }</option>
+										</select>
 
 									</div>
-									<div class="form-group col-6">
-										<label>작성일</label> <input v-model="model.post.friendlyUrl"
-											type="text" class="form-control" name="qna_writedate"
-											value="${vo.qna_writedate }" />
+									<div class="row">
+										<div class="form-group col-6">
+											<label>글번호 </label> <input v-model="model.post.title"
+												class="form-control" name="qna_no" value="${vo.qna_no }" />
+										</div>
+										<div class="form-group col-6">
+											<label>조회수 </label> <input v-model="model.post.title"
+												class="form-control" name="qna_hits"
+												value=" ${vo.qna_hits }">
+										</div>
 									</div>
-								</div>
-								<div class="form-group">
-									<label>제목</label> <input v-model="model.post.friendlyUrl"
-										type="text" class="form-control" name="qna_title"
-										value="${vo.qna_title }" />
-								</div>
+									<div class="row">
+										<div class="form-group col-6">
+											<label>카테고리 </label> <input v-model="model.post.title"
+												class="form-control " id="qna_category" name="qna_category"
+												value="${vo.qna_categoryv }">
+										</div>
 
+										<div class="form-group col-6">
+											<label>답변상태</label> <input v-model="model.post.friendlyUrl"
+												type="text" class="form-control"
+												value=<c:choose>
+												<c:when test="${vo.answerstatus >1}">"답변완료"</c:when>
+												<c:when test="${vo.answerstatus==1 }">"미답변"</c:when>
+												<c:when test="${vo.answerstatus==0 }">"-"</c:when>
+											</c:choose>
+											
+										>
+										</div>
+									</div>
 
-								<div class="form-group">
-									<label>내용</label>
-									<textarea v-model="model.post.body" name="qna_contents"
-										class="col-12 form-control" rows="10">${vo.qna_contents }</textarea>
-								</div>
-								<div class="form-group ">
+									<div class="row">
+										<div class="form-group col-6">
+											<label>작성자 </label> <input v-model="model.post.title"
+												class="form-control" name="qna_shop_customer_no"
+												value="${vo.mem_name}">
 
-
-									<button type="submit" value="Submit" id="update"
-										class="btn btn-default col-12 sub" style="border: 1px solid gray;">수정</button>
-								</div>
-							</div>
-						</div>
-					</div>
-
-					<!-- POST PREVIEW -->
-					<div class="col-6 none">
-						<div class="card">
-							<div class="card-body">
-								<h4 class="card-title">qna 답변하기</h4>
-								<div class="mt-4"
-									<c:if test="${vo.qna_category=='m5' }">class="hide"</c:if>
-									id="result">
-
+										</div>
+										<div class="form-group col-6">
+											<label>작성일</label> <input v-model="model.post.friendlyUrl"
+												type="text" class="form-control" name="qna_writedate"
+												value="${vo.qna_writedate }" />
+										</div>
+									</div>
 									<div class="form-group">
 										<label>제목</label> <input v-model="model.post.friendlyUrl"
-											type="text" class="form-control" name="answer_title" />
+											type="text" class="form-control" name="qna_title"
+											value="${vo.qna_title }" />
 									</div>
 
 
 									<div class="form-group">
 										<label>내용</label>
-										<textarea v-model="model.post.body" name="answer_contents"
-											class="col-12 form-control" rows="10"></textarea>
+										<textarea v-model="model.post.body" name="qna_contents"
+											class="col-12 form-control" rows="10">${vo.qna_contents }</textarea>
 									</div>
 									<div class="form-group ">
 
 
-										<button type="submit" value="Submit" id="submit"
-											class="btn btn-default col-12"
-											style="border: 1px solid gray;">등록</button>
+										<button type="submit" value="Submit" id="update"
+											class="btn btn-default col-12 sub"
+											style="border: 1px solid gray;">수정</button>
 									</div>
-
 								</div>
 							</div>
 						</div>
+
+						<!-- POST PREVIEW -->
+						<div class="col-6 none">
+							<div class="card">
+								<div class="card-body">
+									<h4 class="card-title">qna 답변하기</h4>
+									<div class="mt-4"
+										<c:if test="${vo.qna_category=='m5' }">class="hide"</c:if>
+										id="result">
+
+										<div class="form-group">
+											<label>제목</label> <input v-model="model.post.friendlyUrl"
+												type="text" class="form-control" name="answer_title" />
+										</div>
+
+
+										<div class="form-group">
+											<label>내용</label>
+											<textarea v-model="model.post.body" name="answer_contents"
+												class="col-12 form-control" rows="10"></textarea>
+										</div>
+										<div class="form-group ">
+
+
+											<button type="submit" value="Submit" id="submit"
+												class="btn btn-default col-12"
+												style="border: 1px solid gray;">등록</button>
+										</div>
+
+									</div>
+								</div>
+							</div>
+						</div>
+
+
 					</div>
-
-
-				</div>
-			</form>
+				</form>
+			</div>
 		</div>
-	</div>
 	</div>
 
 

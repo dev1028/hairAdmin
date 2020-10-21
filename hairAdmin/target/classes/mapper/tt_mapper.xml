@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.dbal.app.emp.mapper.TtCategoryMapper">
+	<delete id="tmicDelete">
+		DELETE FROM tt_middle_category WHERE tmic_NO =
+		#{tmic_no}
+
+	</delete>
+	<select id="getTmicList" resultType="ttcategory">
+		SELECT *
+		from
+		tt_middle_category tmic join tt_main_category tmac
+		on(tmic.tmac_no=tmac.tmac_no) WHERE tmic_status = 1
+
+
+	</select>
+	<select id="getRequestTmicList" resultType="ttcategory">
+		SELECT *
+		from
+		tt_middle_category tmic join tt_main_category tmac
+		on(tmic.tmac_no=tmac.tmac_no) WHERE tmic_status != 1
+		AND tmic.tmac_no =
+		tmac.tmac_no
+
+	</select>
+	<select id="getTmacList" resultType="ttcategory">
+		SELECT TMAC_NO, TMAC_NAME,
+		TMAC_EXPLICATION FROM TT_MAIN_CATEGORY ORDER BY TMAC_NAME
+
+
+
+	</select>
+
+	<insert id="tmicInsert" useGeneratedKeys="true"
+		keyProperty="tmic_no" parameterType="ttcategory">
+
+		insert into
+		tt_middle_category(
+		tmac_no, tmic_explication,
+		tmic_status)
+		values(#{tmac_no},#{tmic_explication},1)
+	</insert>
+	<update id="tmicUpdate">
+		update tt_middle_category
+		<trim prefix="SET" suffixOverrides=",">
+			<if test="tmac_name != null">tmac_no=( select tmac_no from tt_main_category
+				where
+				tmac_name=#{tmac_name}) ,
+			</if>
+			<if test="tmic_explication != null">tmic_explication= #{tmic_explication},</if>
+			<if test="tmic_status != null">tmic_status= #{tmic_status},</if>
+		</trim>
+
+
+		where tmic_no=#{tmic_no}
+	</update>
+
+</mapper>

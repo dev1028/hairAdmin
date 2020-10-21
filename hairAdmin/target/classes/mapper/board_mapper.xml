@@ -15,25 +15,36 @@
 	</delete>
 
 	<select id="getQnaList" resultType="qna">
-		select QNA_NO ,QNA_SHOP_CUSTOMER_NO ,QNA_TITLE
-		,QNA_CONTENTS
-		,QNA_WRITEDATE ,QNA_OPENSTATUS ,QNA_HITS,QNA_CATEGORY
-		,EMP_NO ,QNA_WHO
-		,QNA_REF,QNA_REPOS,QNA_LEVEL,QNA_WRITER ,
-		(select
-		c.code_info from code
-		c
-		where c.secondary_code=q.qna_who) as qna_whov,
-		(select z.code_info
-		from code z where z.secondary_code=q.qna_category)
-		as
-		qna_categoryv,
-		(select count(qna_no) from qna r where
-		qna_ref=q.qna_no) as
-		answerstatus
-		from qna q
-		<where>
+	select QNA_NO
+	,QNA_SHOP_CUSTOMER_NO
+	,QNA_TITLE
+	,QNA_CONTENTS
+	,QNA_WRITEDATE ,QNA_OPENSTATUS ,QNA_HITS,QNA_CATEGORY
+	,EMP_NO ,QNA_WHO
+	,QNA_REF,QNA_REPOS,QNA_LEVEL,QNA_WRITER ,mem_name,
+	(select c.code_info
+	from code c
+	where c.secondary_code=q.qna_who) as qna_whov,
+	(select
+	z.code_info
+	from code z
+	where z.secondary_code=q.qna_category) as
+	qna_categoryv,
+	(select count(qna_no)
+	from qna r
+	where
+	qna_ref=q.qna_no) as
+	answerstatus
+	from qna q
+	left outer join members m on(m.mem_no =
+	q.qna_shop_customer_no)
+	<where>
+	
 			<if test="who != null">and q.qna_who like'%'||#{who}||'%'</if>
+			 <if test="answerstatus == 1">and (select count(qna_no) from qna where qna_ref=q.qna_no
+				) <![CDATA[>]]>  1 and qna_category!='m5'</if>
+			<if test="answerstatus == 0">and (select count(qna_no) from qna where qna_ref=q.qna_no
+				) <![CDATA[<]]>  2 and qna_category!='m5'</if> 
 			<if test="category != null">and q.qna_category like'%'||#{category}||'%'</if>
 			<if
 				test='searchInput != null and (searchType eq "title".toString())'>and q.qna_title like '%'||#{searchInput}||'%'</if>
@@ -102,7 +113,8 @@
 
 
 		update qna set
-		qna_title = #{qna_title}, qna_contents = #{qna_contents}
+		qna_title
+		= #{qna_title}, qna_contents = #{qna_contents}
 
 		where qna_no = #{qna_no}
 	</update>
@@ -122,10 +134,12 @@
 
 	<select id="qnaSelectOne" parameterType="qna" resultType="qna">
 		select
-		QNA_NO
-		,QNA_SHOP_CUSTOMER_NO ,QNA_TITLE ,QNA_CONTENTS ,QNA_WRITEDATE
+		QNA_NO, mem_name
+		,QNA_SHOP_CUSTOMER_NO ,QNA_TITLE ,QNA_CONTENTS
+		,QNA_WRITEDATE
 		,QNA_OPENSTATUS ,QNA_HITS,QNA_CATEGORY ,EMP_NO ,QNA_WHO
-		,QNA_REF,QNA_REPOS,QNA_LEVEL,QNA_WRITER ,(select c.code_info from code
+		,QNA_REF,QNA_REPOS,QNA_LEVEL,QNA_WRITER ,
+		(select c.code_info from code
 		c
 		where
 		c.secondary_code=q.qna_who) as qna_whov,
@@ -135,8 +149,9 @@
 		qna_categoryv
 		, (select
 		count(qna_no) from qna r where
-		qna_ref=q.qna_no) as answerComplete from
-		qna q
+		qna_ref=q.qna_no) as answerstatus
+		from
+		qna q left outer join members m on(m.mem_no= q.qna_shop_customer_no)
 		WHERE qna_no=#{qna_no}
 	</select>
 	<delete id="noticeDelete">
@@ -213,13 +228,17 @@
 		from board b
 	</select>
 	<select id="countnotice" resultType="board">
-		SELECT (SELECT count(*) FROM notice WHERE
+		SELECT (SELECT count(*) FROM
+		notice WHERE
 		to_date(notice_writedate,'yy-mm-dd')
-		=to_date(SYSDATE, 'yy-mm-dd') AND
+		=to_date(SYSDATE,
+		'yy-mm-dd') AND
 		notice_who = #{notice_who} ) AS countnew,
-		(SELECT count(*) FROM qna
+		(SELECT
+		count(*) FROM qna
 		where notice_who = #{notice_who}) AS counttotal
-		FROM DUAL;
+		FROM
+		DUAL;
 
 	</select>
 	<select id="countQna" resultType="board">

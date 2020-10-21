@@ -54,13 +54,6 @@
 <link rel="stylesheet"
 	href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,300i,400,400i,500,500i,600,600i,700,700i&amp;subset=latin-ext">
 
-
-<script>
-	requirejs
-			.config({
-				baseUrl : "${pageContext.request.contextPath}/decorator/tabler-gh-pages"
-			});
-</script>
 <!-- Dashboard Core -->
 <link
 	href="${pageContext.request.contextPath}/decorator/tabler-gh-pages/assets/css/dashboard.css"
@@ -88,6 +81,8 @@
 	src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.13.0/js/all.min.js"
 	crossorigin="anonymous"></script>
 
+<script type="text/javascript"
+	src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.24.0/moment.min.js"></script>
 
 
 <%-- <decorator:head></decorator:head> --%>

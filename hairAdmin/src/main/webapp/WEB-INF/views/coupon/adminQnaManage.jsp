@@ -43,12 +43,11 @@
 <%-- <script
 	src="${pageContext.request.contextPath}/decorator/tabler-gh-pages/assets/js/require.min.js"></script>
 --%>
-<script>
-	requirejs
-			.config({
+<!-- <script>
+	requirejs.config({
 				baseUrl : "${pageContext.request.contextPath}/decorator/tabler-gh-pages"
 			});
-</script>
+</script> -->
 <!-- Dashboard Core -->
 <link
 	href="${pageContext.request.contextPath}/decorator/tabler-gh-pages/assets/css/dashboard.css"
@@ -75,22 +74,35 @@
 
 <script type="text/javascript">
 	$(function() {
-		$('#dataTabl').dataTable({
+		$('#table').dataTable({
 			fixedColumns : {
 				leftColumns : 10,
 				heightMatch : 'none'
 			},
 			"paging" : true, //페이징처리
 			"ordering" : true, //칼럼별 정렬기능
-			//"autoWidth": false, //가로자동
+			"autoWidth" : true, //가로자동
 			"lengthChange" : false, //데이터건수 변경
-			"pageLength" : 25, //기본 데이터건수
+			"pageLength" : 10, //기본 데이터건수
 			//"lengthMenu": [[50, 100, 1000], [50, 100, "Max(1000)"]], //데이터건수옵션
 			// "order": [2,'desc'], //기본 정렬칼럼
 			"searching" : false, //검색
-			"columnDefs" : [//칼럼조작
-			//가로길이         //칼럼제목   //데이터타겟    //해당칼럼만 정렬기능사용안함
-			{
+			"language" : {
+				"emptyTable" : "일치하는 데이터가 없습니다. ",
+				"lengthMenu" : "페이지당 _MENU_ 개씩 보기",
+				"info" : " _START_ - _END_ / _TOTAL_건",
+				"infoEmpty" : "데이터 없음",
+				"infoFiltered" : "( _MAX_건의 데이터에서 필터링됨 )",
+				"search" : "에서 검색: ",
+				"zeroRecords" : "일치하는 데이터가 없습니다. ",
+				"loadingRecords" : "로딩중...",
+				"processing" : "잠시만 기다려 주세요...",
+				"paginate" : {
+					"next" : "다음",
+					"previous" : "이전"
+				}
+			},
+			"columnDefs" : [ {
 				"width" : "1em",
 				"targets" : 0,
 				"orderable" : false
@@ -382,25 +394,15 @@
 											</select>
 										</div>
 										<div class="col">
-											<input type="text" id="searchVal" name="searchVal"
+											<input type="text" id="searchVal" name="searchInput"
 												class="form-control ">
-										</div> <div class="btn-list justify-content-end">
-
-							<button type="submit" value="Submit" id="submit"
-								class="btn btn-white btn-secondary btn-lg">검색</button>
-						</div> 
-										<div class="col-3">
-											<a href="#" class="btn btn-white btn-icon"
-												aria-label="Button"> <svg
-													xmlns="http://www.w3.org/2000/svg" class="icon" width="24"
-													height="24" viewBox="0 0 24 24" stroke-width="2"
-													stroke="currentColor" fill="none" stroke-linecap="round"
-													stroke-linejoin="round">
-									<path stroke="none" d="M0 0h24v24H0z"></path>
-									<circle cx="10" cy="10" r="7"></circle>
-									<line x1="21" y1="21" x2="15" y2="15"></line></svg>
-											</a>
 										</div>
+										<div class="btn-list justify-content-end">
+
+											<button type="submit" value="Submit" id="submit"
+												class="btn btn-white btn-secondary btn-lg">검색</button>
+										</div>
+
 
 									</div>
 
@@ -408,7 +410,7 @@
 							</tr>
 						</table>
 					</form>
-					
+
 				</div>
 			</div>
 		</div>
@@ -417,13 +419,12 @@
 				<div class="card-header">
 					<h3 class="card-title">QnA 게시글 목록</h3>
 				</div>
-				<!-- <div class="form-group" id="result"> -->
 				<div class="table-responsive" id="result">
 					<form
 						action="${pageContext.request.contextPath}/admin/qnaDelete.do">
 						<table
 							class="table table-bordered table-sm text-center  table card-table table-vcenter text-nowrap datatable"
-							id="dataTabl" width="100%" cellspacing="0">
+							id="table" width="100%" cellspacing="0">
 
 							<thead>
 								<tr>
@@ -459,18 +460,19 @@
 										<td><c:choose>
 												<c:when test="${l.answerstatus >1}">답변완료</c:when>
 												<c:when test="${l.answerstatus==1 }">미답변</c:when>
+												<c:when test="${l.answerstatus==0 }">-</c:when>
 											</c:choose></td>
-										<td><c:if test="${l.qna_category !='m5' }">
-												<button class="btn btn-default "
-													style="border: 1px solid gray;" type="button"
-													onclick="location.href = 'qnaView.do?qna_no=${ l.qna_no}'">답변하기
-												</button>
-											</c:if></td>
-
-										<%-- 
-										<a
-										href="${pageContext.request.contextPath}/admin/qnaView.do?qna_no=${ l.qna_no}"></a> --%>
-										<%-- <td>${ l.qna_answer}</td> --%>
+										<td>
+											<button class="btn btn-default "
+												style="border: 1px solid gray;" type="button"
+												onclick="location.href = 'qnaView.do?qna_no=${ l.qna_no}'">
+												<c:choose>
+													<c:when test="${l.qna_category !='m5' }">답변하기</c:when>
+													<c:otherwise>수정하기
+													</c:otherwise>
+												</c:choose>
+											</button>
+										</td>
 										<td>${ l.qna_writedate}</td>
 										<td>${ l.qna_hits}</td>
 
@@ -482,24 +484,10 @@
 							class="btn btn-default " style="border: 1px solid gray;">삭제</button>
 						<button id="excel" class="btn btn-default "
 							style="border: 1px solid gray;">excel</button>
+					</form>
 				</div>
-				</form>
 			</div>
 		</div>
-		<!-- <button type="button" id="excel">excel</button> -->
-		<%-- 	<script
-		src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.bundle.min.js"
-		crossorigin="anonymous"></script>
-	<script
-		src="${pageContext.request.contextPath}/decorator/ges/dist/js/scripts.js"></script>
-	<script
-		src="https://cdn.datatables.net/1.10.20/js/jquery.dataTables.min.js"
-		crossorigin="anonymous"></script>
-	<script
-		src="https://cdn.datatables.net/1.10.20/js/dataTables.bootstrap4.min.js"
-		crossorigin="anonymous"></script>
-	<script
-		src="${pageContext.request.contextPath}/decorator/ges/dist/assets/demo/datatables-demo.js"></script> --%>
 	</div>
 </body>
 </html>
