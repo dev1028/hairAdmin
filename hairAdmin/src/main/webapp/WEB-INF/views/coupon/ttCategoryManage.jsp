@@ -100,23 +100,23 @@
 							//"lengthMenu": [[50, 100, 1000], [50, 100, "Max(1000)"]], //데이터건수옵션
 							"order" : [ 0, 'desc' ], //기본 정렬칼럼
 							"searching" : false, //검색
-							"language": {
-						        "emptyTable": "일치하는 데이터가 없습니다. ",
-						        "lengthMenu": "페이지당 _MENU_ 개씩 보기",
-						        "info": " _START_ - _END_ / _TOTAL_건",
-						        "infoEmpty": "데이터 없음",
-						        "infoFiltered": "( _MAX_건의 데이터에서 필터링됨 )",
-						        "search": "에서 검색: ",
-						        "zeroRecords": "일치하는 데이터가 없습니다. ",
-						        "loadingRecords": "로딩중...",
-						        "processing":     "잠시만 기다려 주세요...",
-						        "paginate": {
-						            "next": "다음",
-						            "previous": "이전"
-						        }
-						    },
+							"language" : {
+								"emptyTable" : "일치하는 데이터가 없습니다. ",
+								"lengthMenu" : "페이지당 _MENU_ 개씩 보기",
+								"info" : " _START_ - _END_ / _TOTAL_건",
+								"infoEmpty" : "데이터 없음",
+								"infoFiltered" : "( _MAX_건의 데이터에서 필터링됨 )",
+								"search" : "에서 검색: ",
+								"zeroRecords" : "일치하는 데이터가 없습니다. ",
+								"loadingRecords" : "로딩중...",
+								"processing" : "잠시만 기다려 주세요...",
+								"paginate" : {
+									"next" : "다음",
+									"previous" : "이전"
+								}
+							},
 							"columnDefs" : [
-						
+
 							{
 								"width" : "1em",
 								"targets" : 0,
@@ -135,6 +135,10 @@
 							}, {
 								"width" : ".5em",
 								"targets" : 4,
+								"orderable" : false
+							}, {
+								"width" : ".5em",
+								"targets" : 5,
 								"orderable" : false
 							} ]
 						});
@@ -353,7 +357,50 @@
 																						.append(
 																								$slideSelect)))
 														.append(
-																"<td><div class='toggleupdate'><input id='toggleupdateCode_info'></div></td>")
+																$("<td>")
+																		.append(
+																				$(
+																						"<div>")
+																						.attr(
+																								"class",
+																								"toggleupdate")
+																						.append(
+																								$(
+																										"<input>")
+																										.attr(
+																												'id',
+																												'tmic_name')
+																										.val(
+																												whichUpdateBtn
+																														.closest(
+																																"tr")
+																														.children()
+																														.eq(
+																																2)
+																														.text()))))
+														.append(
+																$("<td>")
+																		.append(
+																				$(
+																						"<div>")
+																						.attr(
+																								"class",
+																								"toggleupdate")
+																						.append(
+																								$(
+																										"<input>")
+																										.attr(
+																												'id',
+																												'tmic_explication')
+																										.val(
+																												whichUpdateBtn
+																														.closest(
+																																"tr")
+																														.children()
+																														.eq(
+																																3)
+																														.text()))))
+
 														.append(
 																"<td><div class='toggleupdate'>"
 																		+ whichUpdateBtn
@@ -361,7 +408,7 @@
 																						"tr")
 																				.children()
 																				.eq(
-																						3)
+																						4)
 																				.text()
 																		+ "</div></td>")
 
@@ -431,10 +478,8 @@
 										function() {
 											var $finTr = $(this).closest("tr")
 													.children();
-											if ($("#toggleupdateCode_info")
-													.val() != null
-													&& $(
-															"#toggleupdateCode_info")
+											if ($("#tmic_name").val() != null
+													&& $("#tmic_explication")
 															.val() != "") {
 												var finUpdate1 = $finTr.eq(0)
 														.find("div").text();
@@ -442,17 +487,19 @@
 														"#toggleupdateSelect option:selected")
 														.val();
 
-												var finUpdate3 = $(
-														"#toggleupdateCode_info")
+												var finUpdate3 = $("#tmic_name")
 														.val();
-
+												var finUpdate4 = $(
+														"#tmic_explication")
+														.val();
 												$
 														.ajax({
 															url : "${pageContext.request.contextPath}/admin/tmicUpdate.do",
 															data : {
 																tmic_no : finUpdate1,
 																tmac_name : finUpdate2,
-																tmic_explication : finUpdate3,
+																tmic_name : finUpdate3,
+																tmic_explication : finUpdate4,
 
 															},
 															type : "post",
@@ -555,7 +602,8 @@
 						<option value="${i.tmac_no }">${i.tmac_name }</option>
 					</c:forEach>
 
-				</select> <label>중분류 설명</label> <input type="text" name="tmic_explication">
+				</select> <label>중분류 이름</label> <input type="text" name="tmic_name">
+				<label>중분류 설명</label> <input type="text" name="tmic_explication">
 				<button id="tmic_insert" class=" btn btn-outline-primary ">등록</button>
 			</div>
 		</form>
@@ -573,6 +621,7 @@
 						<tr>
 							<th scope="row">중분류번호</th>
 							<th scope="row">대분류</th>
+							<th scope="row">중분류 이름</th>
 							<th scope="row">중분류 설명</th>
 							<th scope="row">인증상태</th>
 							<th scope="row">수정/삭제</th>
@@ -585,6 +634,7 @@
 							<tr>
 								<td>${a.tmic_no}</td>
 								<td>${a.tmac_name }</td>
+								<td>${a.tmic_name}</td>
 								<td>${a.tmic_explication}</td>
 								<td><c:choose>
 										<c:when test="${a.tmic_status ==1}">승인완료</c:when>

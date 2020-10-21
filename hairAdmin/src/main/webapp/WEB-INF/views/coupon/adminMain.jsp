@@ -101,45 +101,49 @@
 		});
 	})
 </script>
-<body>	<div class="container">
-	<div class="container">
-	<div class="card mb-4">
+<body>
 
-		<div class="card-body">
-		<h4>신규 입점 헤어샵 추이 </h4>
-			<canvas id="myAreaChart" width="100%" height="30"></canvas>
+	<div class="container">
+		<div class="card mb-4">
+
+			<div class="card-body">
+				<h4>신규 입점 헤어샵 추이</h4>
+				<canvas id="myAreaChart" width="100%" height="30"></canvas>
+			</div>
+
 		</div>
 
-	</div>
+		<div class="card mb-4">
 
+			<div class="card-body">
+				<div class="table-responsive" id="result">
+					<h5>헤어샵 입점요청 현황</h5>
+					<table class="table table-bordered" width="100%" cellspacing="0">
+						<thead>
+							<tr>
+								<th>미용실번호</th>
+								<th>헤어샵이름</th>
+								<th>인증상태</th>
+							</tr>
+						</thead>
+						<tbody>
+							<c:forEach items="${list }" var="i">
+								<tr>
+									<td>${i.hs_no }</td>
+									<td>${i.hs_name }</td>
+									<td><c:choose>
 
-	<div class="table-responsive" id="result">
-	<h5>헤어샵 입점요청 현황</h5>
-		<table class="table table-bordered" width="100%" cellspacing="0">
-			<thead>
-				<tr>
-					<th>미용실번호</th>
-					<th>헤어샵이름</th>
-					<th>인증상태</th>
-				</tr>
-			</thead>
-			<tbody>
-				<c:forEach items="${list }" var="i">
-					<tr>
-						<td>${i.hs_no }</td>
-						<td>${i.hs_name }</td>
-						<td><c:choose>
-
-								<c:when test="${i .hs_approval=='0'}">인증완료
+											<c:when test="${i .hs_approval=='0'}">인증완료
 									</c:when>
-								<c:when test="${ i.hs_approval=='-1'}">미인증</c:when>
-							</c:choose></td>
-					</tr>
-				</c:forEach>
-			</tbody>
-		</table>
-	</div>
-	</div>
+											<c:when test="${ i.hs_approval=='-1'}">미인증</c:when>
+										</c:choose></td>
+								</tr>
+							</c:forEach>
+						</tbody>
+					</table>
+				</div>
+			</div>
+		</div>
 	</div>
 </body>
 </html>

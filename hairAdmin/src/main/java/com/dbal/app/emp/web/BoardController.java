@@ -93,7 +93,8 @@ public class BoardController {
 
 		} else {
 
-			String emp_no = session.getAttribute("empno").toString();
+			//String emp_no = session.getAttribute("empno").toString();
+			String emp_no = "51";
 			String qna_ref = vo.getQna_no();
 			vo.setEmp_no(emp_no);
 			vo.setQna_ref(vo.getQna_no());
