@@ -8,38 +8,78 @@
 <meta charset="UTF-8">
 <title>Insert title here</title>
 
-<link
-	href="${pageContext.request.contextPath}/decorator/ges/dist/css/styles.css"
-	rel="stylesheet" />
-<link
-	href="https://cdn.datatables.net/1.10.20/css/dataTables.bootstrap4.min.css"
-	rel="stylesheet" crossorigin="anonymous" />
-<script
-	src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.13.0/js/all.min.js"
-	crossorigin="anonymous"></script>
-<script
-	src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.bundle.min.js"
-	crossorigin="anonymous"></script>
-<script
-	src="${pageContext.request.contextPath}/decorator/ges/dist/js/scripts.js"></script>
-<script
-	src="https://cdn.datatables.net/1.10.20/js/jquery.dataTables.min.js"
-	crossorigin="anonymous"></script>
-<script
-	src="https://cdn.datatables.net/1.10.20/js/dataTables.bootstrap4.min.js"
-	crossorigin="anonymous"></script>
-<script
-	src="${pageContext.request.contextPath}/decorator/ges/dist/assets/demo/datatables-demo.js"></script>
-
-<script type="text/javascript"
-	src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.24.0/moment.min.js"></script>
 <script>	
 var jsonlist = ${jsonlist};
 var empOne;
 var clickcnt = 0;
 var thisTr;
 	$(function() {
+		$('#table').dataTable({
 
+			fixedColumns : {
+				leftColumns : 10,
+				heightMatch : 'none'
+			},
+			"paging" : true, //페이징처리
+			"ordering" : true, //칼럼별 정렬기능
+			"autoWidth" : true, //가로자동
+			"lengthChange" : false, //데이터건수 변경
+			"pageLength" : 10, //기본 데이터건수
+			//"lengthMenu": [[50, 100, 1000], [50, 100, "Max(1000)"]], //데이터건수옵션
+			// "order": [2,'desc'], //기본 정렬칼럼
+			"searching" : false, //검색
+			"language" : {
+				"emptyTable" : "일치하는 데이터가 없습니다. ",
+				"lengthMenu" : "페이지당 _MENU_ 개씩 보기",
+				"info" : " _START_ - _END_ / _TOTAL_건",
+				"infoEmpty" : "데이터 없음",
+				"infoFiltered" : "( _MAX_건의 데이터에서 필터링됨 )",
+				"search" : "에서 검색: ",
+				"zeroRecords" : "일치하는 데이터가 없습니다. ",
+				"loadingRecords" : "로딩중...",
+				"processing" : "잠시만 기다려 주세요...",
+				"paginate" : {
+					"next" : "다음",
+					"previous" : "이전"
+				}
+			},
+			"columnDefs" : [ {
+				"width" : "1em",
+				"targets" : 0,
+				"orderable" : false
+			}, {
+				"width" : "1em",
+				"targets" : 1,
+				"orderable" : true
+			}, {
+				"width" : "1em",
+				"targets" : 2
+			}, {
+				"width" : "1em",
+				"targets" : 3,
+				"orderable" : true
+			}, {
+				"width" : "1em",
+				"targets" : 4,
+				"orderable" : false
+			}, {
+				"width" : "1em",
+				"targets" : 5,
+				"orderable" : true
+			}, {
+				"width" : "1em",
+				"targets" : 6,
+				"orderable" : false
+			}, {
+				"width" : "1em",
+				"targets" : 7,
+				"orderable" : true
+			}, {
+				"width" : "1em",
+				"targets" : 8,
+				"orderable" : true
+			} ]
+		});
 		$("#tbody").on("click","tr",function(){
 			if(clickcnt == 0){
 				thisTr = $(this);
@@ -144,51 +184,64 @@ var thisTr;
 </script>
 </head>
 <body>
+
 	<div class="container">
-		<h2 class="heading">일반회원관리</h2>
 
-		<div class="table-responsive" id="result">
-			<table class="table table-bordered" id="dataTable" width="100%"
-				cellspacing="0">
-				<thead>
-					<tr>
-						<th><input type="checkbox" name="all" id="all" class="chk"></th>
-						<th>회원번호</th>
-						<th>회원이름</th>
-						<th>이메일</th>
-						<th>전화번호</th>
-						<th>성별</th>
-						<th>나이</th>
-						<th>지역</th>
-					</tr>
-				</thead>
-				<tbody id="tbody">
-					<c:forEach items="${list }" var="l">
-						<tr id="${l.mem_no }">
 
-							<td><input type="checkbox" class="chk"></td>
-							<td>${ l.mem_no}</td>
-							<td id="name">${ l.mem_name}</td>
-							<td id="email">${ l.mem_email}</td>
-							<td>${ l.mem_phone}</td>
-							<td><c:choose>
-									<c:when test="${ l.mem_sex == 'female'}">여자</c:when>
-									<c:when test="${ l.mem_sex == 'male'}">남자</c:when>
-								</c:choose></td>
-							<td>${ l.mem_age}</td>
-							<td>${ l.mem_city}</td>
-						</tr>
-					</c:forEach>
-				</tbody>
-			</table>
 
-			<button id="excel">excel</button>
-			<button id="email">email</button>
+
+
+
+
+		<div class="col">
+			<div class="card">
+				<div class="card-header d-flex">
+					<h3 class="card-title">일반회원관리</h3>
+
+				</div>
+				<div class="table-responsive" id="result">
+					<table class="table table-bordered" id="table" width="100%"
+						cellspacing="0">
+						<thead>
+							<tr>
+								<th><input type="checkbox" name="all" id="all" class="chk"></th>
+								<th>회원번호</th>
+								<th>회원이름</th>
+								<th>이메일</th>
+								<th>전화번호</th>
+								<th>성별</th>
+								<th>나이</th>
+								<th>지역</th>
+							</tr>
+						</thead>
+						<tbody id="tbody">
+							<c:forEach items="${list }" var="l">
+								<tr id="${l.mem_no }">
+
+									<td><input type="checkbox" class="chk"></td>
+									<td>${ l.mem_no}</td>
+									<td id="name">${ l.mem_name}</td>
+									<td id="email">${ l.mem_email}</td>
+									<td>${ l.mem_phone}</td>
+									<td><c:choose>
+											<c:when test="${ l.mem_sex == 'female'}">여자</c:when>
+											<c:when test="${ l.mem_sex == 'male'}">남자</c:when>
+										</c:choose></td>
+									<td>${ l.mem_age}</td>
+									<td>${ l.mem_city}</td>
+								</tr>
+							</c:forEach>
+						</tbody>
+					</table>
+
+					<button id="excel">excel</button>
+					<button id="email">email</button>
+				</div>
+
+
+			</div>
 		</div>
-
-
 	</div>
-
 
 	<div class="modal fade" id="myModal" data-backdrop="static"
 		data-keyboard="false" tabindex="-1"
@@ -234,13 +287,11 @@ var thisTr;
 
 										<label for="mem_phone">전화번호</label> <input
 											class="form-control" type="email" name="mem_phone"
-											id="mem_phone" value="" /> <span
-											id="emailChecking"></span>
+											id="mem_phone" value="" /> <span id="emailChecking"></span>
 									</div>
 									<div class="form-group">
 										<label for="mem_sex">성별</label> <input class="form-control"
-											type="text" name="mem_sex" id="mem_sex"  value=""
-											 />
+											type="text" name="mem_sex" id="mem_sex" value="" />
 									</div>
 									<div class="form-group">
 										<label for="mem_name">생년월일</label> <input class="form-control"
@@ -252,8 +303,7 @@ var thisTr;
 									</div>
 									<div class="form-group">
 										<label for="mem_tel">적립금</label> <input class="form-control"
-											type="text" name="mem_tel" id="MEM_SAVED_MONEY" value=""
-											 />
+											type="text" name="mem_tel" id="MEM_SAVED_MONEY" value="" />
 									</div>
 									<div class="form-group">
 										<label for="mem_comp_no">주소</label> <input

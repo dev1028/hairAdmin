@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.dbal.app.emp.mapper.AnalysisMapper">
+
+	<select id="getRankByTreat" resultType="analysis">
+		SELECT rownum rn, l.cnt,
+		l.hhi_name, l.hhmi_file
+		FROM (SELECT k.cnt, hhi.hhi_name,
+		hhmi.hhmi_file
+		FROM (SELECT hhi_no, count(hhi_no) as cnt
+		FROM
+		mem_designer_rsv_info mdri
+		group by hhi_no) k JOIN hairshop_hair_info
+		hhi
+		ON hhi.hhi_no = k.hhi_no
+		LEFT OUTER JOIN hairshop_hair_more_info
+		hhmi
+		ON hhi.hhi_no = hhmi.hhi_no ORDER BY cnt DESC) l
+
+
+
+	</select>
+
+	<select id="getRankBySalesHairshop" resultType="analysis" parameterType="analysis">
+		SELECT 	h.hs_name,
+				h.hs_no, 
+				SUM(( 
+						SELECT nvl(SUM(mdp_price), 0) 
+						FROM members_detail_paylist
+						WHERE mdr_no = r.mdr_no 
+						and substr(to_char(r.mdr_date,'yyyy-mm'),0,8) =#{date}
+				)) AS sales, 
+				RANK() OVER( ORDER BY SUM((
+							SELECT nvl(SUM(mdp_price), 0) 
+							FROM members_detail_paylist 
+							WHERE mdr_no = r.mdr_no 
+							and substr(to_char(r.mdr_date,'yyyy-mm'),0,8) =#{date}
+				)) DESC ) AS rank
+		FROM members_designer_rsv r
+		join hairshop h ON(r.hs_no=h.hs_no)
+		WHERE r.mdr_status IN ( 'i3', 'i4')
+		GROUP BY h.hs_name, h.hs_no
+
+
+
+	</select>
+	<select id="getRankByRsvHairshop" resultType="analysis" parameterType="analysis">
+		SELECT h.hs_name,
+		h.hs_no, count(*) as rsv ,rank() over (order by count(*) desc) rank
+		FROM hairshop h JOIN members_designer_rsv r ON(r.hs_no=h.hs_no)
+		WHERE
+		substr( to_char(r.mdr_date,'yyyy-mm'),0,8) = #{date} and
+		r.mdr_status
+		IN ( 'i3', 'i4')group by h.hs_name, h.hs_no
+
+
+
+
+	</select>
+	<select id="getRankByRateHairshop" resultType="analysis" parameterType="analysis">
+		SELECT h.hs_name,
+		h.hs_no, round(nvl(avg(( SELECT
+		avg(hr_rate) FROM hairshop_reviews WHERE
+		mdr_no = r.mdr_no and substr( to_char(r.mdr_date,'yyyy-mm'),0,8) = #{date}
+		)), 0)) AS rate, RANK() OVER( ORDER BY
+		round( nvl(avg(( SELECT avg(hr_rate) FROM
+		hairshop_reviews WHERE
+		mdr_no = r.mdr_no and substr( to_char(r.mdr_date,'yyyy-mm'),0,8) = #{date}
+		)), 0) )DESC ) AS rank FROM members_designer_rsv r
+		join hairshop h ON(r.hs_no=h.hs_no)
+		WHERE
+		r. mdr_status IN ( 'i3', 'i4')
+		GROUP BY h.hs_name, h.hs_no
+
+
+
+	</select>
+
+
+</mapper>

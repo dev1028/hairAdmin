@@ -1,39 +1,12 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
-
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
-
-<link
-	href="${pageContext.request.contextPath}/decorator/ges/dist/css/styles.css"
-	rel="stylesheet" />
-<link
-	href="https://cdn.datatables.net/1.10.20/css/dataTables.bootstrap4.min.css"
-	rel="stylesheet" crossorigin="anonymous" />
-<script
-	src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.13.0/js/all.min.js"
-	crossorigin="anonymous"></script>
-<script
-	src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.bundle.min.js"
-	crossorigin="anonymous"></script>
-<script
-	src="${pageContext.request.contextPath}/decorator/ges/dist/js/scripts.js"></script>
-<script
-	src="https://cdn.datatables.net/1.10.20/js/jquery.dataTables.min.js"
-	crossorigin="anonymous"></script>
-<script
-	src="https://cdn.datatables.net/1.10.20/js/dataTables.bootstrap4.min.js"
-	crossorigin="anonymous"></script>
-<script
-	src="${pageContext.request.contextPath}/decorator/ges/dist/assets/demo/datatables-demo.js"></script>
-
-<script type="text/javascript"
-	src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.24.0/moment.min.js"></script>
-
 <script type="text/javascript">
 
 		var hairshoplist = ${hairshoplist};
@@ -41,7 +14,68 @@
 		var clickcnt = 0;
 		var thisTr;
 		$(function() {
+			$('#table').dataTable({
 
+				/* fixedColumns : {
+					leftColumns : 10,
+					heightMatch : 'none'
+				}, */
+				"paging" : true, //페이징처리
+				"ordering" : true, //칼럼별 정렬기능
+				"autoWidth" : true, //가로자동
+				"lengthChange" : false, //데이터건수 변경
+				"pageLength" : 10, //기본 데이터건수
+				//"lengthMenu": [[50, 100, 1000], [50, 100, "Max(1000)"]], //데이터건수옵션
+				"order": [1,'asc'], //기본 정렬칼럼
+				"searching" : false, //검색
+				"language" : {
+					"emptyTable" : "일치하는 데이터가 없습니다. ",
+					"lengthMenu" : "페이지당 _MENU_ 개씩 보기",
+					"info" : " _START_ - _END_ / _TOTAL_건",
+					"infoEmpty" : "데이터 없음",
+					"infoFiltered" : "( _MAX_건의 데이터에서 필터링됨 )",
+					"search" : "에서 검색: ",
+					"zeroRecords" : "일치하는 데이터가 없습니다. ",
+					"loadingRecords" : "로딩중...",
+					"processing" : "잠시만 기다려 주세요...",
+					"paginate" : {
+						"next" : "다음",
+						"previous" : "이전"
+					}
+				},
+				"columnDefs" : [ {
+				 "width" : ".1em",
+					"targets" : 0,
+					"orderable" : false
+				}, {
+					"width" : ".1em",
+					"targets" : 1,
+					"orderable" : true
+				}, {
+					"width" : "1em",
+					"targets" : 2
+				}, {
+					"width" : "1em",
+					"targets" : 3,
+					"orderable" : true
+				}, {
+					"width" : "1em",
+					"targets" : 4,
+					"orderable" : false
+				}, {
+					"width" : "1em",
+					"targets" : 5,
+					"orderable" : true
+				}, {
+					"width" : "1em",
+					"targets" : 6,
+					"orderable" : false
+				}, {
+					"width" : "1em",
+					"targets" : 7,
+					"orderable" : true
+				} ]
+			});
 			$("#tbody").on("click","tr",function(){
 				if(clickcnt == 0){
 					thisTr = $(this);
@@ -65,7 +99,9 @@
 					$("#hs_owner").val(empOne.hs_owner);
 					$("#hs_pw").val(empOne.hs_pw);
 					$("#hs_fulladdr").val(empOne.hs_fulladdr);
-					$("#hs_approval").val(empOne.hs_approval);
+					if(empOne.hs_approval=='1'){
+					$("#hs_approval").val("승인");
+					}
 					$("#hs_profile").val(empOne.hs_profile);
 					$("#hs_notice").val(empOne.hs_notice);
 					$("#hs_latlong").val(empOne.hs_latlong);
@@ -150,9 +186,22 @@
 </script>
 </head>
 <body>
+
 	<div class="container">
-		<h2 class="heading">헤어샵회원관리</h2>
-		<%-- 	<form
+
+
+
+
+
+
+
+		<div class="col">
+			<div class="card">
+				<div class="card-body ">
+					<h3 class="card-title">헤어샵 회원관리</h3>
+
+
+					<%-- 	<form
 		action="${pageContext.request.contextPath}/admin/adminHairshopManageFind.do">
 		<div class="form-group">
 			<div class="control">
@@ -174,41 +223,48 @@
 		</div>
 
 	</form> --%>
-		<div class="table-responsive" id="result">
-			<table class="table table-bordered" id="dataTable" width="100%"
-				cellspacing="0">
-				<thead>
-					<tr>
-						<th><input type="checkbox" name="all" id="all" class="chk"></th>
-						<th>헤어샵번호</th>
-						<th>헤어샵이름</th>
-						<th>헤어샵아이디</th>
-						<th>대표자명</th>
-						<th>전화번호</th>
-						<th>지역</th>
-						<th>등록일</th>
-					</tr>
-				</thead>
-				<tbody id="tbody">
-					<c:forEach items="${list }" var="l">
-						<tr id="${l.hs_no }">
+					<div class="table-responsive" id="result">
+						<table
+							class="table table-bordered table table-hover table-outline table-vcenter text-nowrap card-table"
+							id="table" width="100%" cellspacing="0">
+							<thead>
+								<tr>
+									<th><input type="checkbox" name="all" id="all" class="chk"></th>
+									<th>헤어샵<br>번호
+									</th>
+									<th>헤어샵이름</th>
+									<th>헤어샵아이디</th>
+									<th>대표자명</th>
+									<th>전화번호</th>
+									<th>지역</th>
+									<th>등록일</th>
+								</tr>
+							</thead>
+							<tbody id="tbody">
+								<c:forEach items="${list }" var="l">
+									<tr id="${l.hs_no }">
 
-							<td><input type="checkbox" class="chk"></td>
-							<td>${ l.getHs_no()}</td>
-							<td>${ l.hs_name}</td>
-							<td>${ l.hs_email}</td>
-							<td>${ l.hs_owner}</td>
-							<td>${ l.hs_tel}</td>
-							<td>${ l.hs_fulladdr}</td>
-							<td>${ l.hs_regdate}</td>
-						</tr>
-					</c:forEach>
-				</tbody>
-			</table>
-			<button id="excel">excel</button>
-			<!-- 		<button id="email">email</button> -->
+										<td><input type="checkbox" class="chk"></td>
+										<td>${ l.getHs_no()}</td>
+										<td>${ l.hs_name}</td>
+										<td>${ l.hs_email}</td>
+										<td>${ l.hs_owner}</td>
+										<td>${ l.hs_tel}</td>
+										<td>${ l.hs_cityaddr}</td>
+										<td>${ fn:substring(l.hs_regdate,0,10)}</td>
+									</tr>
+								</c:forEach>
+							</tbody>
+						</table>
+						<button id="excel" class="btn btn-secondary ">excel</button>
+						<button id="email" class="btn btn-secondary ">email</button>
+					</div>
+				</div>
+			</div>
 		</div>
 	</div>
+
+
 
 	<div class="modal fade" id="myModal" data-backdrop="static"
 		data-keyboard="false" tabindex="-1"
@@ -219,7 +275,7 @@
 				<!-- Modal Header -->
 				<div class="modal-header">
 					<h4 class="modal-title" id="modal_title">상세 정보</h4>
-					<button type="button" class="close" data-dismiss="modal">&times;</button>
+					<button type="button" class="close" data-dismiss="modal"></button>
 				</div>
 
 				<!-- Modal body -->

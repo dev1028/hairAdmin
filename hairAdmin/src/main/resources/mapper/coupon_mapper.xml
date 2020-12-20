@@ -11,7 +11,7 @@
 			#{item}
 		</foreach>
 	</delete>
-	<select id="getCouponList" resultType="coupon">
+	<select id="getCouponList1" resultType="coupon">
 		SELECT
 
 		c.HSC_NO,c.HS_NO,to_char(c.HSC_ISSUEDATE,'yy-mm-dd')as
@@ -28,6 +28,42 @@
 
 	</select>
 
+	<select id="getCouponList" resultType="coupon">
+		SELECT
+<![CDATA[
+		(CASE
+		WHEN
+		c.hsc_coupon_quantity < 1 THEN
+		'소진'
+		WHEN c.hsc_expiredate < sysdate THEN
+		'만료
+		'
+		WHEN hsc_issuedate > sysdate THEN
+		'발급전 '
+		WHEN hsc_expiredate > sysdate
+		THEN
+		'발급중'
+		else 'else'
+		END)]]>
+		hsc_status,
+
+		c.HSC_NO,c.HS_NO,to_char(c.HSC_ISSUEDATE,'yy-mm-dd')as
+		HSC_ISSUEDATE,to_char(c.HSC_EXPIREDATE,'yy-mm-dd')as
+		HSC_EXPIREDATE,c.HSC_COUPON_QUANTITY,c.HSC_DISCOUNT_RATE,c.HSC_MAXDISCOUNT_PAY,c.HSC_NAME,
+
+		h.*
+		FROM
+		hs_coupon c
+		JOIN hairshop h ON ( h.hs_no
+		= c.hs_no )
+
+
+
+
+
+
+
+	</select>
 	<insert id="couponInsert" parameterType="coupon">
 
 

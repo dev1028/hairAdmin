@@ -183,18 +183,6 @@
 
 		}
 
-		$(".asc").on("click", function() {
-			console.log($(this).parent('th').index())
-			toggleBool = false;
-			gwanshic($("tbody"), $(this).parent('th').index())
-
-		})
-		$(".des").on("click", function() {
-			console.log($(this).parent('th').index())
-			toggleBool = true;
-			gwanshic($("tbody"), $(this).parent('th').index())
-		})
-
 		$("#all").on("click", function() {
 
 			var check = $("#all").prop("checked");
@@ -234,7 +222,7 @@
 					<h3 class="card-title">게시글 조회</h3>
 				</div>
 
-				<div class="table-responsive" id="result">
+				<div class="" id="result">
 					<form action="${pageContext.request.contextPath}/admin/qnaFind.do">
 
 						<table
@@ -283,7 +271,7 @@
 
 							<tr>
 								<td>사용자</td>
-								<td><div class="">
+								<td><div class="col">
 										<select name="who" id="who" class="form-control">
 											<option class="form-control form-check-input" value="">전체사용자</option>
 											<option class="form-control form-check-input" value="j1">미용실</option>
@@ -294,7 +282,7 @@
 
 									</div></td>
 								<td>카테고리</td>
-								<td><div class="">
+								<td><div class="col">
 										<select class="form-control " name="category" id="category">
 											<option class="form-control form-check-input" value="">전체카테고리</option>
 											<option class="form-control form-check-input" value="a1">입점문의</option>
@@ -306,7 +294,7 @@
 
 							<tr>
 								<td>답변상태</td>
-								<td><div class="">
+								<td><div class="col">
 										<select class="form-control " name="answerstatus"
 											id="answerstatus">
 											<option class="form-control form-check-input" value="">전체</option>
@@ -315,37 +303,36 @@
 										</select>
 									</div></td>
 								<td>답변글 제외</td>
-								<td><input type="checkbox" id="exclude" name="excludeAns"
-									value="exclude" class="form-control "></td>
+								<td><div class="col">
+										<input type="checkbox" id="exclude" name="excludeAns"
+											value="exclude" class="form-control pull-left">
+									</div></td>
 							</tr>
 							<tr>
 								<td><label>게시글 찾기</label></td>
 								<td colspan="4">
 									<div class="input-group">
 
-										<div class="col">
+										<div class="col-2">
 
 											<select name="searchType" id="searchType"
-												class="form-control ">
+												class="form-control">
 												<option value="title">제목</option>
 												<option value="contents">내용</option>
+
+
 											</select>
 										</div>
-										<div class="col">
+										<div class="col-4 input-group">
 											<input type="text" id="searchVal" name="searchInput"
 												class="form-control ">
 										</div>
 
-										<div class="btn-list justify-content-end col-3">
-
-											<button type="submit" value="Submit" id="submit"
-												class="btn btn-white btn-secondary btn-lg ">검색</button>
-
+										<div class=" justify-content-end col-6 ">
+											<button type="submit" class="btn btn-secondary pull-right">&nbsp;&nbsp;&nbsp;
+												조 회 &nbsp;&nbsp;&nbsp;</button>
 										</div>
-
-
 									</div>
-
 								</td>
 							</tr>
 						</table>
@@ -356,81 +343,77 @@
 		</div>
 		<div class="col">
 			<div class="card">
-				<div class="card-header d-flex">
+				<div class="card-body">
 					<h3 class="card-title">QnA 게시글 목록</h3>
-					<!-- <div class="btn-list justify-content-end text-right d-flex">
-						<button type="submit" value="0" id="delete"
-							class="btn btn-default btn btn-primary ml-auto" style="border: 1px solid gray;">삭제</button>
-						<button id="excel" class="btn btn-default "
-							style="border: 1px solid gray;">excel</button>
-					</div> -->
-				</div>
-				<div class="table-responsive" id="result">
-					<form
-						action="${pageContext.request.contextPath}/admin/qnaDelete.do">
-						<table
-							class="table table-bordered table-sm text-center  table card-table table-vcenter text-nowrap datatable"
-							id="table" width="100%" cellspacing="0">
 
-							<thead>
-								<tr>
-									<th><input type="checkbox" name="all" id="all" class="chk"></th>
-									<th>page
-									<th>번호</th>
-									<th>분류</th>
-									<th>제목</th>
-									<th>답변상태</th>
-									<th>답변하기</th>
-									<!-- <th>작성자</th> -->
-									<th>작성일</th>
-									<th>조회수</th>
-								</tr>
-							</thead>
-							<tbody id="tbody">
-								<c:forEach items="${list }" var="l">
+					<div class="" id="result">
+						<form
+							action="${pageContext.request.contextPath}/admin/qnaDelete.do">
+							<table
+								class="table table-bordered table-sm text-center  table card-table table-vcenter text-nowrap datatable"
+								id="table" width="100%" cellspacing="0">
+
+								<thead>
 									<tr>
+										<th><input type="checkbox" name="all" id="all"
+											class="chk"></th>
+										<th>page
+										<th>번호</th>
+										<th>분류</th>
+										<th>제목</th>
+										<th>답변상태</th>
+										<th>답변하기</th>
+										<!-- <th>작성자</th> -->
+										<th>작성일</th>
+										<th>조회수</th>
+									</tr>
+								</thead>
+								<tbody id="tbody">
+									<c:forEach items="${list }" var="l">
+										<tr>
 
-										<td><input type="checkbox" class="chk" name="qna_no"
-											value="${l.qna_no }"></td>
-										<td>${ l.qna_whov}</td>
-										<td>${ l.qna_no}</td>
-										<td>${ l.qna_categoryv}</td>
-										<td><c:if test="${l.qna_level > 0}">
-												<c:forEach begin="1" end="${l.qna_level}">
+											<td><input type="checkbox" class="chk" name="qna_no"
+												value="${l.qna_no }"></td>
+											<td>${ l.qna_whov}</td>
+											<td>${ l.qna_no}</td>
+											<td>${ l.qna_categoryv}</td>
+											<td><c:if test="${l.qna_level > 0}">
+													<c:forEach begin="1" end="${l.qna_level}">
 			&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;	<!-- 답변글일경우 글 제목 앞에 공백을 준다. -->
-												</c:forEach>
+													</c:forEach>
 	&nbsp;&nbsp;&nbsp;&nbsp;RE :
 	</c:if> <a
-											href="${pageContext.request.contextPath}/admin/qnaView.do?qna_no=${ l.qna_no}">${ l.qna_title}</a></td>
+												href="${pageContext.request.contextPath}/admin/qnaView.do?qna_no=${ l.qna_no}">${ l.qna_title}</a></td>
 
-										<td><c:choose>
-												<c:when test="${l.answerstatus >1}">답변완료</c:when>
-												<c:when test="${l.answerstatus==1 }">미답변</c:when>
-												<c:when test="${l.answerstatus==0 }">-</c:when>
-											</c:choose></td>
-										<td>
-											<button class="btn btn-default "
-												style="border: 1px solid gray;" type="button"
-												onclick="location.href = 'qnaView.do?qna_no=${ l.qna_no}'">
-												<c:choose>
-													<c:when test="${l.qna_category !='m5' }">답변하기</c:when>
-													<c:otherwise>수정하기
+											<td><c:choose>
+													<c:when test="${l.answerstatus >1}">답변완료</c:when>
+													<c:when test="${l.answerstatus==1 }">미답변</c:when>
+													<c:when test="${l.answerstatus==0 }">-</c:when>
+												</c:choose></td>
+											<td>
+												<button class="btn btn-default "
+													style="border: 1px solid gray;" type="button"
+													onclick="location.href = 'qnaView.do?qna_no=${ l.qna_no}'">
+													<c:choose>
+														<c:when test="${l.qna_category !='m5' }">답변하기</c:when>
+														<c:otherwise>수정하기
 													</c:otherwise>
-												</c:choose>
-											</button>
-										</td>
-										<td>${ l.qna_writedate}</td>
-										<td>${ l.qna_hits}</td>
+													</c:choose>
+												</button>
+											</td>
+											<td>${ l.qna_writedate}</td>
+											<td>${ l.qna_hits}</td>
 
-									</tr>
-								</c:forEach>
-							</tbody>
-						</table>
-						<button type="submit" value="0" id="delete"
-							class="btn btn-default " style="border: 1px solid gray;">삭제</button>
-						<button id="excel" class="btn btn-default "
-							style="border: 1px solid gray;">excel</button>
-					</form>
+										</tr>
+									</c:forEach>
+								</tbody>
+							</table>
+							<button type="submit" value="0" id="delete"
+								class="btn btn-default " style="border: 1px solid gray;">삭제</button>
+							<button id="excel" class="btn btn-default "
+								style="border: 1px solid gray;">excel</button>
+						</form>
+					</div>
 				</div>
 			</div>
 		</div>

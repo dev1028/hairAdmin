@@ -58,6 +58,9 @@
 <link
 	href="${pageContext.request.contextPath}/decorator/tabler-gh-pages/assets/css/dashboard.css"
 	rel="stylesheet" />
+	<link
+	href="${pageContext.request.contextPath}/decorator/tabler-gh-pages/assets/css/tabler.css"
+	rel="stylesheet" />
 <script
 	src="${pageContext.request.contextPath}/decorator/tabler-gh-pages/assets/js/dashboard.js"></script>
 <!-- c3.js Charts Plugin -->

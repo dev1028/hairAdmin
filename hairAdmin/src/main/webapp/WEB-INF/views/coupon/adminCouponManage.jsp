@@ -7,42 +7,73 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
-<link rel="stylesheet"
-	href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
-	integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm"
-	crossorigin="anonymous">
-<link
-	href="${pageContext.request.contextPath}/resources/ges/dist/css/styles.css"
-	rel="stylesheet" />
-<link
-	href="https://cdn.datatables.net/1.10.20/css/dataTables.bootstrap4.min.css"
-	rel="stylesheet" crossorigin="anonymous" />
-	<script src="https://code.jquery.com/jquery-3.5.1.js" integrity="sha256-QWo7LDvxbWT2tbbQ97B53yJnYU3WhH/C8ycbRAkjPDc=" crossorigin="anonymous"></script>
-<script
-	src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.13.0/js/all.min.js"
-	crossorigin="anonymous"></script>
-<script
-	src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.bundle.min.js"
-	crossorigin="anonymous"></script>
-<script
-	src="${pageContext.request.contextPath}/resources/ges/dist/js/scripts.js"></script>
-<script
-	src="https://cdn.datatables.net/1.10.20/js/jquery.dataTables.min.js"
-	crossorigin="anonymous"></script>
-<script
-	src="https://cdn.datatables.net/1.10.20/js/dataTables.bootstrap4.min.js"
-	crossorigin="anonymous"></script>
-<script
-	src="${pageContext.request.contextPath}/resources/ges/dist/assets/demo/datatables-demo.js"></script>
 
 
-
-<script type="text/javascript"
-	src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.24.0/moment.min.js"></script>
-<script
-	src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
-<script>
+<script type="text/javascript">
 	$(function() {
+
+		$('#table').dataTable({
+
+			/* fixedColumns : {
+				leftColumns : 10,
+				heightMatch : 'none'
+			}, */
+			"paging" : true, //페이징처리
+			"ordering" : true, //칼럼별 정렬기능
+			"autoWidth" : true, //가로자동
+			"lengthChange" : false, //데이터건수 변경
+			"pageLength" : 10, //기본 데이터건수
+			//"lengthMenu": [[50, 100, 1000], [50, 100, "Max(1000)"]], //데이터건수옵션
+			 "order": [1,'desc'], //기본 정렬칼럼
+			"searching" : false, //검색
+			"language" : {
+				"emptyTable" : "일치하는 데이터가 없습니다. ",
+				"lengthMenu" : "페이지당 _MENU_ 개씩 보기",
+				"info" : " _START_ - _END_ / _TOTAL_건",
+				"infoEmpty" : "데이터 없음",
+				"infoFiltered" : "( _MAX_건의 데이터에서 필터링됨 )",
+				"search" : "에서 검색: ",
+				"zeroRecords" : "일치하는 데이터가 없습니다. ",
+				"loadingRecords" : "로딩중...",
+				"processing" : "잠시만 기다려 주세요...",
+				"paginate" : {
+					"next" : "다음",
+					"previous" : "이전"
+				}
+			},
+			"columnDefs" : [ {
+				"orderable" : false,
+				"width" : ".001em",
+				"targets" : 0
+			}, {
+				//"width" : "1em",
+				"targets" : 1,
+				"orderable" : true
+			}, {
+				//"width" : "1em",
+				"targets" : 2
+			}, {
+				//"width" : "1em",
+				"targets" : 3,
+				"orderable" : true
+			}, {
+				//"width" : "1em",
+				"targets" : 4,
+				"orderable" : true
+			}, {
+				//"width" : "1em",
+				"targets" : 5,
+				"orderable" : true
+			}, {
+				//"width" : "1em",
+				"targets" : 6,
+				"orderable" : true
+			}, {
+				//"width" : "1em",
+				"targets" : 7,
+				"orderable" : true
+			} ]
+		});
 
 		$("#all").on("click", function() {
 
@@ -76,69 +107,89 @@
 </head>
 <body>
 
-
-
-
+	<br>
 
 	<div class="container">
-		<form
-			action="${pageContext.request.contextPath}/admin/adminCouponfind.do">
 
-		</form>
-
-
-
-		<h2 class="heading">발급쿠폰목록</h2>
-		<div class="form-group" id="result">
-			<form
-				action="${pageContext.request.contextPath}/admin/adminCouponDelete.do">
-
-				<button type="submit" value="0" id="delete">삭제</button>
-				<input type="button" value="등록" id="insert">
-
-
-				<div class="table-responsive" id="result">
-					<table class="table table-bordered" id="dataTable" width="100%"
-						cellspacing="0">
-						<thead>
-							<tr>
-								<th><input type="checkbox" name="all" id="all" class="chk"></th>
-								<th>쿠폰번호</th>
-								<th>상태</th>
-								<!--  <th>발급</th> -->
-								<th>쿠폰명</th>
-								<th>할인율</th>
-								<th>사용기간</th>
-								<th>잔여수</th>
-								<th>헤어샵</th>
-								<!-- <th>수정</th>
-						<th>발급내역</th> -->
-							</tr>
-						</thead>
-						<tbody id="tbody">
-							<c:forEach items="${list }" var="l">
-								<tr>
-
-									<td><input type="checkbox" class="chk" name = "hsc_no" value="${l.hsc_no }"></td>
-									<td>${l.hsc_no }</td>
-									<td>${l.hsc_status }</td>
-									<!--  <td></td> -->
-									<td>${ l.hsc_name}</td>
-									<td>${ l.hsc_discount_rate}%</td>
-									<td>${l.hsc_issuedate}~${ l.hsc_expiredate}</td>
-									<td>${ l.hsc_coupon_quantity}</td>
-
-									<td>${l.hs_name }</td>
-									<!-- <td></td>
-								<td></td> -->
-								</tr>
-							</c:forEach>
-						</tbody>
-					</table>
+		<div class="col">
+			<div class="card">
+				
+			
+				<div class="card-body" id="result">
+				<div>
+					<h3 class="card-title">발급 쿠폰 목록</h3>
 				</div>
-				<button id="excel">excel</button>
-			</form>
+	<div class="btn-list justify-content-end  input-group">
+
+					<input type="button" class="pull-right btn btn-secondary "
+						value="등록" id="insert">
+					<button type="submit" value="0" id="delete"
+						class="pull-right btn btn-outline-danger ">삭제</button>
+					<button id="excel" class="pull-right btn btn-secondary ">excel</button>
+				</div>
+				
+			
+				
+					<form
+						action="${pageContext.request.contextPath}/admin/adminCouponDelete.do">
+		
+<div>
+
+						<table
+							class="table table-bordered table-sm text-center card-table table-vcenter text-nowrap datatable"
+							id="table" width="100%" cellspacing="0">
+
+							<thead>
+								<tr>
+									<th><input type="checkbox" name="all" id="all" class="chk"></th>
+									<th>쿠폰번호</th>
+									<th>상태</th>
+									<!--  <th>발급</th> -->
+									<th>쿠폰명</th>
+									<th>할인율</th>
+									<th>사용기간</th>
+									<th>잔여수</th>
+									<th>헤어샵</th>
+									<!-- <th>수정</th>
+						<th>발급내역</th> -->
+								</tr>
+							</thead>
+							<tbody id="tbody">
+								<c:forEach items="${list }" var="l">
+									<tr>
+
+										<td><input type="checkbox" class="chk" name="hsc_no"
+											value="${l.hsc_no }"></td>
+										<td>${l.hsc_no }</td>
+										<td>${l.hsc_status }</td>
+										<!--  <td></td> -->
+										<td>${ l.hsc_name}</td>
+										<td>${ l.hsc_discount_rate}%</td>
+										<td>${l.hsc_issuedate}~${ l.hsc_expiredate}</td>
+										<td>${ l.hsc_coupon_quantity}</td>
+
+										<td>${l.hs_name }</td>
+										<!-- <td></td>
+								<td></td> -->
+									</tr>
+								</c:forEach>
+							</tbody>
+						</table>
+						</div>
+					</form>
+				</div>
+				<!-- <div class="btn-list justify-content-end  input-group">
+
+					<input type="button" class="pull-right btn btn-secondary "
+						value="등록" id="insert">
+					<button type="submit" value="0" id="delete"
+						class="pull-right btn btn-secondary ">삭제</button>
+					<button id="excel" class="pull-right btn btn-secondary ">excel</button>
+				</div> -->
+			</div>
 		</div>
+
+
 		<!-- <button type="button" id="excel">excel</button> -->
 
 
@@ -147,22 +198,22 @@
 		<div class="modal fade" id="myModal" data-backdrop="static"
 			data-keyboard="false" tabindex="-1"
 			aria-labelledby="staticBackdropLabel" aria-hidden="true">
-			<div class="modal-dialog modal-lg">
+			<div class="modal-dialog modal-lg" role="document">
 				<div class="modal-content">
+					<form id="empUpdatefrm"
+						action="${pageContext.request.contextPath}/admin/adminCouponInsertSubmit.do">
+						<!-- Modal Header -->
+						<div class="modal-header">
+							<h4 class="modal-title" id="modal_title">쿠폰 등록</h4>
+							<button type="button" class="close" data-dismiss="modal"></button>
+						</div>
 
-					<!-- Modal Header -->
-					<div class="modal-header">
-						<h4 class="modal-title" id="modal_title">상세 정보</h4>
-						<button type="button" class="close" data-dismiss="modal">&times;</button>
-					</div>
 
 
+						<div class="modal-body">
+							<div class="container">
 
-					<div class="modal-body">
-						<div class="container">
 
-							<form id="empUpdatefrm"
-								action="${pageContext.request.contextPath}/admin/adminCouponInsertSubmit.do">
 								<div class="card">
 									<div class="card-body">
 
@@ -171,16 +222,18 @@
 												type="text" name="hsc_name" id="hs_no" value="" />
 										</div>
 										<label for="hs_name">사용기간</label>
-										<div class="form-group row">
+										<div class="form-group ">
+											<div class="row">
+												<div class="col">
+													<input type="date" class="form-control"
+														name="hsc_issuedate">
 
-											<div class="col">
-												<input type="date" class="form-control" name="hsc_issuedate">
-
-											</div>
-											-
-											<div class="col">
-												<input type="date" class="form-control"
-													name="hsc_expiredate">
+												</div>
+												-
+												<div class="col">
+													<input type="date" class="form-control"
+														name="hsc_expiredate">
+												</div>
 											</div>
 										</div>
 										<!-- <div class="col"> -->
@@ -210,18 +263,10 @@
 										<div class="form-group">
 											<label for="hs_pw">발급매수</label> <input class="form-control"
 												type="text" name="hsc_coupon_quantity" id="hs_pw" value=""
-												placeholder="비밀번호를 입력하세요." />
+											/>
 										</div>
 
-										<div>
-
-
-
-											<button type="submit" value="Submit" id="submit"
-												class="btn btn-default col-3"
-												style="border: 1px solid gray;">등록</button>
-
-										</div>
+										<div></div>
 
 
 
@@ -230,20 +275,21 @@
 
 									</div>
 								</div>
-							</form>
 
 
-						</div>
-					</div>
 
-					<!-- Modal footer -->
-					<div class="modal-footer">
-						<div class="row">
-
-							<button type="button" class="btn btn-info" data-dismiss="modal">닫기</button>
+							</div>
 						</div>
 
-					</div>
+						<!-- Modal footer -->
+						<div class="modal-footer">
+
+							<button type="submit" value="Submit" id="submit"
+								class="btn btn-secondary"  >등록</button>
+							<button type="button" class="btn btn-outline-danger" data-dismiss="modal">닫기</button>
+
+						</div>
+					</form>
 				</div>
 			</div>
 		</div>

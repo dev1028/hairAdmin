@@ -34,4 +34,6 @@ public class AnalysisVo {
 	String file_name;
 	String hr_rate;		
 	String rate;
+	String rn;
+	String hhmi_file;
 }

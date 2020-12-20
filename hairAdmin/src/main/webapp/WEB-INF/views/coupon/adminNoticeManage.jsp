@@ -17,7 +17,7 @@
 
 			"paging" : true, //페이징처리
 			"ordering" : true, //칼럼별 정렬기능
-			"autoWidth" : false, //가로자동
+			"autoWidth" : true, //가로자동
 			"lengthChange" : false, //데이터건수 변경
 			"pageLength" : 10, //기본 데이터건수
 			"order" : [ 5, 'desc' ], //기본 정렬칼럼
@@ -154,6 +154,8 @@
 
 </head>
 <body>
+	<br>
+	<br>
 	<div class="container">
 
 		<h4 class="heading">공지사항 게시판 관리</h4>
@@ -168,7 +170,7 @@
 
 				</div>
 
-				<div class="table-responsive" id="result">
+				<div class="" id="result">
 					<form
 						action="${pageContext.request.contextPath}/admin/noticeFind.do">
 
@@ -225,107 +227,119 @@
 							<tr>
 								<td>사용자</td>
 								<td><div class="input-group">
-										<select name="who" id="who" class="form-control">
-											<option class="form-control form-check-input" value="">전체사용자</option>
-											<option class="form-control form-check-input" value="j1">미용실</option>
-											<option class="form-control form-check-input" value="j2">일반회원</option>
-											<option class="form-control form-check-input" value="j3">디자이너</option>
-										</select>
+										<div class="col">
+											<select name="who" id="who" class="form-control">
+												<option class="form-control form-check-input" value="">전체사용자</option>
+												<option class="form-control form-check-input" value="j1">미용실</option>
+												<option class="form-control form-check-input" value="j2">일반회원</option>
+												<option class="form-control form-check-input" value="j3">디자이너</option>
+											</select>
+										</div>
 									</div></td>
 
 							</tr>
 
 							<tr>
-								<td><label>게시글 찾기</label></td>
+								<td><label class="">게시글 찾기</label></td>
 								<td colspan="4">
 									<div class="input-group">
 
-										<div class="col">
+										<div class="col-2">
 
 											<select name="searchType" id="searchType"
-												class="form-control ">
+												class="form-control">
 												<option value="title">제목</option>
 												<option value="contents">내용</option>
 
 
 											</select>
 										</div>
-										<div class="col">
+										<div class="col-4 input-group">
 											<input type="text" id="searchVal" name="searchInput"
 												class="form-control ">
 										</div>
 
-										<div>
-											<button type="submit" class="btn btn-secondary">검색</button>
+										<div class=" justify-content-end col-6 ">
+											<button type="submit" class="btn btn-secondary pull-right">&nbsp;&nbsp;&nbsp; 조 회 &nbsp;&nbsp;&nbsp;</button>
 										</div>
 									</div>
 								</td>
 							</tr>
 						</table>
 
-
-						<div class="btn-list justify-content-end">
+						<div>
+							<!-- <div class="justify-content-end">
 
 							<button type="submit" value="Submit" id="submit"
-								class="btn btn-white btn-secondary btn-lg">검색</button>
+								class="btn btn-white btn-secondary btn-lg pull-right">검색</button>
+						</div> -->
 						</div>
 
 					</form>
 				</div>
 			</div>
 		</div>
+
 		<div class="col">
 			<div class="card">
-				<form
-					action="${pageContext.request.contextPath}/admin/noticeDelete.do">
-					<div>
-						<button type="button" id="excel" class="btn btn-secondary">excel</button>
-						<button type="submit" class="btn btn-secondary " value="0"
-							id="delete">삭제</button>
+
+
+				<div class="card-body ">
+					<h3 class="card-title">공지사항 게시글 목록</h3>
+
+
+					<div class="btn-list justify-content-end  input-group">
+
+						<input type="button" class="pull-right btn btn-secondary "
+							value="등록" id="insert">
+						<button type="submit" value="0" id="delete"
+							class="pull-right btn btn-outline-danger ">삭제</button>
+						<button id="excel" class="pull-right btn btn-secondary ">excel</button>
 					</div>
 
-					<div class="table-responsive" id="result">
-						<table
-							class="table table-bordered table table-hover table-outline table-vcenter text-nowrap card-table"
-							id="table" width="100%" cellspacing="0">
-							<thead>
-								<tr>
-									<th><input type="checkbox" name="all" id="all" class="chk"></th>
-									<th>번호</th>
-									<th>분류</th>
-									<th>제목</th>
-									<th>작성자</th>
-									<th>작성일</th>
-									<th>조회수</th>
-								</tr>
-							</thead>
-							<tbody id="tbody">
-								<c:forEach items="${list }" var="l">
+
+					<div class="" id="result">
+						<form
+							action="${pageContext.request.contextPath}/admin/noticeDelete.do">
+							<table
+								class="table table-bordered table table-hover table-outline table-vcenter text-nowrap card-table"
+								id="table" width="100%" cellspacing="0">
+								<thead>
 									<tr>
-
-										<td><input type="checkbox" class="chk" name="notice_no"
-											value="${l.notice_no }"></td>
-										<td>${ l.notice_no}</td>
-										<td>${ l.notice_whov}</td>
-										<td><a
-											href="adminNoticeView.do?notice_no=${ l.notice_no}">${ l.notice_title}</a></td>
-
-										<td>${ l.emp_name}</td>
-										<td>${ l.notice_writedate}</td>
-										<td>${ l.notice_hits}</td>
+										<th><input type="checkbox" name="all" id="all"
+											class="chk"></th>
+										<th>번호</th>
+										<th>분류</th>
+										<th>제목</th>
+										<th>작성자</th>
+										<th>작성일</th>
+										<th>조회수</th>
 									</tr>
-								</c:forEach>
-							</tbody>
-						</table>
+								</thead>
+								<tbody id="tbody">
+									<c:forEach items="${list }" var="l">
+										<tr>
 
+											<td><input type="checkbox" class="chk" name="notice_no"
+												value="${l.notice_no }"></td>
+											<td>${ l.notice_no}</td>
+											<td>${ l.notice_whov}</td>
+											<td><a
+												href="adminNoticeView.do?notice_no=${ l.notice_no}">${ l.notice_title}</a></td>
+
+											<td>${ l.emp_name}</td>
+											<td>${ l.notice_writedate}</td>
+											<td>${ l.notice_hits}</td>
+										</tr>
+									</c:forEach>
+								</tbody>
+							</table>
+						</form>
 					</div>
-				</form>
+				</div>
 			</div>
+
+
 		</div>
-	</div>
-
-
-
-
 </body>
 </html>

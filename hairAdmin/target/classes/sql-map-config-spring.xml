@@ -18,6 +18,7 @@
 		<typeAlias type="com.dbal.app.emp.MembersVo" alias="member"/> 
 		<typeAlias type="com.dbal.app.emp.AnalysisVo" alias="analysis"/> 
 		<typeAlias type="com.dbal.app.emp.TtCategoryVo" alias="ttcategory"/> 
+		<typeAlias type="com.dbal.app.emp.AnalysisVo" alias="analysis"/> 
 	</typeAliases>
 
 </configuration>
